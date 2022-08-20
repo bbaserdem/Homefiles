@@ -1,0 +1,40 @@
+#-------------------#
+#-----BLACKLIST-----#
+#-------------------#
+
+# Ignore all files by default
+*
+
+#------------------#
+#-----EXTERNAL-----#
+#------------------#
+!/.gitignore
+!/.gitmodules
+!/Readme.md
+
+# Don' get subrepos
+/pass
+/archlinux
+/gentoo
+
+# Grab scripts from bin
+!/bin
+!/bin/*.sh
+!/bin/*.py
+!/bin/arch-repo*
+!/bin/sysinfo
+!/bin/sysinfo/*.sh
+!/bin/eww
+!/bin/eww/*.sh
+
+# Grab the gnupg symlinks, but nothing else from this directory
+!/gnupg
+/gnupg/*
+!/gnupg/gpg-agent.conf
+!/gnupg/gpg.conf
+
+# Grab some application overrides
+!/share
+!/share/applications
+!/share/applications/thunar-bulk-rename.desktop
+!/share/applications/thunar-settings.desktop

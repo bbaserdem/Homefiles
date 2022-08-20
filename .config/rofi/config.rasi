@@ -1,0 +1,48 @@
+// Rofi configuration in JSON like format
+configuration {
+
+    // Theme
+
+    // Application Behavior
+    modi: "window,drun,file-browser-extended,ssh";
+    combi-modi: "drun,ssh,run";
+    disable-history: false;
+    cycle: false;
+    sort: true;
+    case-sensitive: false;
+    // parse-hosts: true;
+    parse-known-hosts: false;
+    monitor: "-1";
+    filter: "";
+    window-format: "{w}    {i}{c}   {t}";
+    click-to-exit: true;
+    show-match: true;
+
+    // View options
+    font: "Iosevka 12";
+    width: 50;
+    lines: 16;
+    show-icons: true;
+    // drun-icon-theme: "Papirus-Dark";
+    xoffset: 24;
+    yoffset: 0;
+    eh: 1;
+
+    // System Behavior
+    terminal: "kitty";
+    ssh-client: "ssh";
+    ssh-command: "{terminal} -e {ssh-client} {host}";
+    run-command: "{cmd}";
+    run-list-command: "";
+    run-shell-command: "{terminal} -e {cmd}";
+    window-command: "xkill -id {window}";
+    sidebar-mode: true;
+    auto-select: false;
+    matching: "normal";
+    tokenize: true;
+    fake-transparency: true;
+    fake-background: "screenshot";
+    dpi: -1;
+    threads: 0;
+}
+@theme "Arc-Dark"

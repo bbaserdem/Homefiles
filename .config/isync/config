@@ -1,0 +1,59 @@
+##########################
+##### Config options #####
+##########################
+Create Both
+Expunge Both
+SyncState *
+
+#################
+##### Gmail #####
+#################
+IMAPAccount Gmail
+Host imap.gmail.com
+User baserdem.batuhan@gmail.com
+PassCmd "$HOME/.cache/isync/password-Gmail.sh"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# Remote storage
+IMAPStore Gmail-remote
+Account Gmail
+
+# Local storage
+MaildirStore Gmail-local
+Subfolders Verbatim
+Path ~/Mail/Gmail/
+Inbox ~/Mail/Gmail/Inbox/
+
+Channel Gmail-Inbox
+Master :Gmail-remote:
+Slave :Gmail-local:
+Patterns "INBOX"
+
+Channel Gmail-sent
+Master :Gmail-remote:"[Gmail]/Sent Mail"
+Slave :Gmail-local:Sent
+
+Channel Gmail-trash
+Master :Gmail-remote:"[Gmail]/Trash"
+Slave :Gmail-local:Trash
+
+Channel Gmail-drafts
+Master :Gmail-remote:"[Gmail]/Drafts"
+Slave :Gmail-local:Drafts
+
+Channel Gmail-important
+Master :Gmail-remote:"[Gmail]/Important"
+Slave :Gmail-local:Important
+
+Channel Gmail-starred
+Master :Gmail-remote:"[Gmail]/Starred"
+Slave :Gmail-local:Starred
+
+Group Gmail
+Channel Gmail-inbox
+Channel Gmail-sent
+Channel Gmail-trash
+Channel Gmail-drafts
+Channel Gmail-important
+Channel Gmail-starred

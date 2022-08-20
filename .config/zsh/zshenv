@@ -1,0 +1,2 @@
+# Define Zim location
+export ZIM_HOME="${HOME}/.local/share/zim"

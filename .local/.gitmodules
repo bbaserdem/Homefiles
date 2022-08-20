@@ -1,0 +1,9 @@
+[submodule "pass"]
+	path = pass
+	url = git@github.com:bbaserdem/pass.git
+[submodule "archlinux"]
+	path = archlinux
+	url = git@github.com:bbaserdem/Archlinux_Metadistribution.git
+[submodule "gentoo"]
+	path = gentoo
+	url = git@github.com:bbaserdem/Gentoo_Metadistribution.git

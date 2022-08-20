@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Configure
+bspc config border_width                2
+bspc config window_gap                  12
+bspc config merge_overlapping_monitors  true
+bspc config remove_disabled_monitors    true
+bspc config remove_unplugged_monitors   true
+bspc config split_ratio                 0.52
+bspc config borderless_monocle          true
+bspc config gapless_monocle             true
+bspc config automatic_scheme            longest_side
+bspc config external_rules_command      "${XDG_CONFIG_HOME}/bspwm/external_rules.sh"
+
+# Set XDG_CURRENT_DESKTOP for mimetypes
+export XDG_CURRENT_DESKTOP="bspwm"
+
+# Fix Java apps
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+# Reload background
+bspwm-wallpaper.sh reload
+
+# Refresh layouts
+bspwm-layout.sh
+
+# Tell autorandr to chill
+touch "${XDG_CACHE_HOME}/autorandr_chill"
+
+# Turn bell off
+xset b off
+
+# Autostart programs
+dex --autostart --environment bspwm

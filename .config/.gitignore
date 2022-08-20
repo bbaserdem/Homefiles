@@ -1,0 +1,331 @@
+#-------------------#
+#-----BLACKLIST-----#
+#-------------------#
+
+# Ignore all files
+*
+
+#------------------#
+#-----EXTERNAL-----#
+#------------------#
+
+# (Symbolic) Links to external folders
+
+# Unity based games
+!/unity3d
+# Stardew Valley
+!/StardewValley
+# Fran Bow
+!/Fran_Bow
+# Loop Hero
+!/Loop_Hero
+# Mod the spire
+!/ModTheSpire
+# Creeper World 3
+!/creeperworld3
+# Race for the Galaxy
+!/rftg
+
+#-------------------#
+#-----WHITELIST-----#
+#-------------------#
+
+# Files to track
+!/.gitignore
+!/Readme.md
+!/crontab.cron
+!/gpg-agent.conf
+!/gpg.conf
+!/locale.conf
+!/*mimeapps.list
+!/msmtprc
+!/picom.conf
+!/steamos-compositor-plus
+!/tmux.conf
+!/user-dirs.dirs
+
+# KVANTUM: Grab the config file
+!/Kvantum
+!/Kvantum/kvantum.kvconfig
+!/Kvantum/ArcDark#
+!/Kvantum/ArcDark#/ArcDark#.kvconfig
+
+# MULLVAD: Only grab the gui settings file
+!/Mullvad\ VPN/
+/Mullvad\ VPN/**
+!/Mullvad\ VPN/gui_settings.json
+
+# X11: Grab everything here since I wrote them
+!/X11
+!/X11/**
+
+# AUTORANDR: Grab all info
+!/autorandr
+!/autorandr/**
+
+# AUTOSTART: Grab all overrides
+!/autostart
+!/autostart/**
+
+# BASH: Accept all
+!/bash
+!/bash/**
+
+# BSPWM: Accept all
+!/bspwm
+!/bspwm/**
+
+# CURSOR: Accept all
+!/cursor
+!/cursor/**
+
+# DOCKER
+!/docker
+!/docker/**
+
+# DUNST: Accept the rc
+!/dunst
+!/dunst/dunstrc
+
+# EWW: Grab all info
+!/eww
+!/eww/**
+
+# FIREJAIL: Get custom firejail configs
+!/firejail
+!/firejail/**
+
+# FIREWALL: Get applet settings
+!/firewall
+!/firewall/**
+
+# FONTCONFIG: Accept the fontconfig file
+!/fontconfig
+!/fontconfig/fonts.conf
+
+# GAMMASTEP: Accept all files
+!/gammastep
+!/gammastep/*
+
+# GNUPG: Get the needed files
+!/gnupg
+!/gnupg/*
+
+# GIT: Grab config file
+!/git
+!/git/config
+
+# GTK: Get settings
+!/gtk-1.0
+!/gtk-1.0/gtkrc
+!/gtk-2.0
+!/gtk-2.0/gtkrc
+!/gtk-3.0
+!/gtk-3.0/bookmarks
+!/gtk-3.0/settings.ini
+!/gtk-3.0/gtk.css
+!/gtk-4.0/
+!/gtk-4.0/settings.ini
+
+# IMV: Get all
+!/imv
+!/imv/**
+
+# ISYNC: Get only the config
+!/isync
+!/isync/config
+
+# JUPYTER: Get only the config file
+!/jupyter
+!/jupyter/jupyter_notebook_config.py
+
+# KANSHI: Grab all
+!/kanshi
+!/kanshi/**
+
+# KHAL: Grab all calender files
+!/khal
+!/khal/**
+
+# KHARD: Grab all contact
+!/khard
+!/khard/**
+
+# KITTY: Grab the conf files
+!/kitty
+!/kitty/*.conf
+!/kitty/colors
+!/kitty/colors/*.conf
+!/kitty/fonts
+!/kitty/fonts/*.conf
+
+# LATEX: Grab all
+!/latex
+!/latex/**
+
+# LISTENBRAINZ: Grab config
+!/listenbrainz-mpd
+!/listenbrainz-mpd/config.toml
+
+# MATLAB: Only get config, and symlinks
+!/matlab
+!/matlab/R2*
+!/matlab/MLintDefaultSettings.txt
+
+# MPD: Only get config
+!/mpd
+!/mpd/mpd.conf
+
+# MPV: Only grab config
+!/mpv
+!/mpv/mpv.conf
+
+# NCMPCPP: Grab what I have created
+!/ncmpcpp
+!/ncmpcpp/config
+
+# NEOFETCH: Grab the config
+!/neofetch
+!/neofetch/config
+
+# NEOMUTT: Things are safe to grab
+!/neomutt
+!/neomutt/**
+
+# NEWSBOAT: Grab the config and url
+!/newsboat
+!/newsboat/config
+!/newsboat/urls
+
+# NVIM: Grab config files; and files that will have general configurations
+!/nvim
+!/nvim/*.vim
+!/nvim/*.lua
+!/nvim/**.md
+!/nvim/after
+!/nvim/after/**
+!/nvim/before
+!/nvim/before/**
+!/nvim/ftdetect
+!/nvim/ftdetect/**
+!/nvim/ftplugin
+!/nvim/ftplugin/**
+!/nvim/lua
+!/nvim/lua/**
+# Plugins folder is where compiled packer lives
+/nvim/plugin/packer_compiled.lua
+
+# OCTAVE: Grab example qt for colors, and the rc file
+!/octave
+!/octave/octaverc
+!/octave/qt-settings
+
+# POLYBAR: Grab all
+!/polybar
+!/polybar/config.ini
+
+# PROFILE.D: Grab all configuration
+!/profile
+!/profile.d
+!/profile.d/*.sh
+
+# PROFILE SYNC DAEMON: Grab all
+!/psd
+!/psd/*
+
+# QMK: Gather configuration
+!/qmk
+!/qmk/*
+
+# QUTEBROWSER: Grab my files
+!/qutebrowser
+!/qutebrowser/bookmarks
+!/qutebrowser/bookmarks/**
+!/qutebrowser/css
+!/qutebrowser/css/*
+!/qutebrowser/blocked-hosts
+!/qutebrowser/config.py
+!/qutebrowser/quickmarks
+
+# RAMBOX: Only copy the themes
+!/pacman
+!/pacman/**
+
+# ROFI: Grab user made files and scripts
+!/rofi
+!/rofi/**
+/rofi/__pycache__
+
+# SUPERVISORD: Grab config
+!/supervisor
+!/supervisor/**
+
+# SWAY: Grab all sway files
+!/sway
+!/sway/**
+
+# SXHKD: Grab all
+!/sxhkd
+!/sxhkd/**
+
+# SYNCTHING-GTK: Grab config
+!/syncthing-gtk
+!/syncthing-gtk/config.json
+
+# SYSTEMD: Grab everything, for systemd based systems
+!/systemd
+!/systemd/**
+
+# TMUXINATOR: Grab everything
+!/tmuxinator
+!/tmuxinator/**
+
+# TODOMAN: Grab everything
+!/todoman
+!/todoman/**
+
+# UDISKIE: Grab config
+!/udiskie
+!/udiskie/config.json
+
+# URLSCAN: Get config
+!/urlscan
+!/urlscan/**
+
+# VDIRSYNCER: Grab only config
+!/vdirsyncer
+!/vdirsyncer/config
+
+# VIFM: Grab config files
+!/vifm
+!/vifm/vifmrc
+!/vifm/colors
+!/vifm/colors/*.vifm
+
+# WAYBAR: Grab all
+!/waybar
+!/waybar/**
+
+# YT-DLP: Grab config
+!/yt-dlp
+!/yt-dlp/**
+
+# ZATHURA: Grab config
+!/zathura
+!/zathura/**
+
+# ZSH: Ignore all but few files certain files
+!/zsh
+!/zsh/zlogin
+!/zsh/.zlogin
+!/zsh/zlogout
+!/zsh/.zlogout
+!/zsh/zprofile
+!/zsh/.zprofile
+!/zsh/zshrc
+!/zsh/.zshrc
+!/zsh/zshenv
+!/zsh/.zshenv
+!/zsh/zimrc
+!/zsh/.zimrc
+!/zsh/p10k*.zsh

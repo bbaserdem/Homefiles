@@ -1,0 +1,98 @@
+# Used for setting user's interactive shell configuration and executing commands,
+# will be read when starting as an interactive shell.
+
+# User configuration
+export HIST_STAMPS="dd/mm/yyyy"
+export HISTFILE="${XDG_DATA_HOME}/zsh/history"
+setopt HIST_IGNORE_ALL_DUPS
+
+# SSH agent
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+    export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+
+# Bash completion in zsh
+autoload bashcompinit
+bashcompinit -d "${XDG_CACHE_HOME}/zsh"
+
+# Aliases
+wttr_weather () {
+    if [ -z "${1}" ]
+    then
+        curl 'https://wttr.in/?m'
+    else
+        curl 'https://wttr.in/'"$(echo $1)"
+    fi
+}
+
+# Aliases
+alias py='bpython'
+alias mutt='neomutt'
+alias arch-killorphans='sudo pacman -Rns $(pacman -Qttdq)'
+alias gitdiff='git difftool --no-symlinks --dir-diff'
+
+# ZIM settings
+# Remove path separator from WORDCHARS.
+WORDCHARS=${WORDCHARS//[\/]}
+# Set a custom path for the completion dump file.
+zstyle ':zim:completion' dumpfile "${XDG_CACHE_HOME}/zsh/zcompdump-${ZSH_VERSION}"
+# Set a custom terminal title format using prompt expansion escape sequences.
+# See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
+# If none is provided, the default '%n@%m: %~' is used.
+zstyle ':zim:termtitle' format '%1~'
+# Set what highlighters will be used.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets cursor)
+#zinput_mode='vi'
+# Customize the main highlighter styles.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
+#typeset -A ZSH_HIGHLIGHT_STYLES
+#ZSH_HIGHLIGHT_STYLES[comment]='fg=10'
+
+# Install zim installer
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+fi
+
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+    source ${ZIM_HOME}/zimfw.zsh init -q
+fi
+
+# Source and initialize zim modules
+source ${ZIM_HOME}/init.zsh
+
+# Post-init zimfw module configuration
+
+# Set editor default keymap to emacs (`-e`) or vi (`-v`)
+bindkey -v
+# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+# Bind up and down keys
+zmodload -F zsh/terminfo +p:terminfo
+if [[ -n ${terminfo[kcuu1]} && -n ${terminfo[kcud1]} ]]; then
+    bindkey ${terminfo[kcuu1]} history-substring-search-up
+    bindkey ${terminfo[kcud1]} history-substring-search-down
+fi
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+# Prompt
+zprompt_theme='powerlevel10k'
+if tty | grep -q tty; then
+    # TTY default to the text theme
+    [[ -f "${ZDOTDIR}/p10k.text.zsh" ]] && source "${ZDOTDIR}/p10k.icon.zsh"
+else
+    # To customize prompt, run `p10k configure` or edit ~/.config/zsh/p10k.zsh
+    [[ -f "${ZDOTDIR}/p10k.icon.zsh" ]] && source "${ZDOTDIR}/p10k.icon.zsh"
+fi
+
+# TEMPORARY: SYSTEMD FIX:
+#!_systemctl_unit_state() {
+#  typeset -gA _sys_unit_state
+#  _sys_unit_state=( $(__systemctl list-unit-files "$PREFIX*" | awk '{print $1, $2}') ) }

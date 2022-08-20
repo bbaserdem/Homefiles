@@ -1,0 +1,31 @@
+# vim:filetype=sway
+
+#------------------#
+#-----HARDWARE-----#
+#------------------#
+
+input type:touchpad {
+    # Touchpad
+    tap                 enabled
+    scroll_method       two_finger
+    natural_scroll      enabled
+    middle_emulation    enabled
+    left_handed         disabled
+    dwt                 enabled
+    events              enabled
+    drag_lock           disabled
+    accel_profile       adaptive
+}
+
+input type:keyboard {
+    # Keyboard
+    xkb_layout          "us,tr,us"
+    xkb_variant         "dvorak,f,"
+    xkb_options         "grp:caps_toggle"
+}
+
+#--------------#
+#---MONITORS---#
+#--------------#
+# Main monitor layout is to be done with kanshi
+exec_always pkill kanshi; exec kanshi
