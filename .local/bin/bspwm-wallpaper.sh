@@ -47,12 +47,12 @@ elif [ -n "${_thisdir}" ]; then
     else
         _img="$(imfind_dir "${_thisdir}")"
     fi
-elif [ -n "${SBP_XPAPER_DIR}" ] && [ -d "${_base}/${SBP_XPAPER_DIR}" ]; then
+elif [ -n "${SBP_WALLPAPER_DIR}" ] && [ -d "${_base}/${SBP_WALLPAPER_DIR}" ]; then
     # Try to find image; if a dir is specified
-    if [ -d "${_base}/${SBP_XPAPER_DIR}/${_x}x${_y}" ] ; then
-        _img="$(imfind_dir "${_base}/${SBP_XPAPER_DIR}/${_x}x${_y}")"
+    if [ -d "${_base}/${SBP_WALLPAPER_DIR}/${_x}x${_y}" ] ; then
+        _img="$(imfind_dir "${_base}/${SBP_WALLPAPER_DIR}/${_x}x${_y}")"
     else
-        _img="$(imfind_dir "${_base}/${SBP_XPAPER_DIR}")"
+        _img="$(imfind_dir "${_base}/${SBP_WALLPAPER_DIR}")"
     fi
 else
     # If the dir is not specified; try to find one in other locations

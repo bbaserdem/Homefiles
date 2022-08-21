@@ -5,7 +5,7 @@
 trap 'exit' INT TERM
 trap 'kill 0' EXIT
 
-# Buffer duration to stagger; in miliseconds
+# Buffer duration to stagger; in milliseconds
 _bufdur=200
 
 #########################################

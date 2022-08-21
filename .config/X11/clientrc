@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# Here Xfce is kept as default
+session="${1}"
+if [ -z "${session}" ] ; then
+    session='bspwm'
+fi
+
 if [ -z "${XDG_CONFIG_HOME}" ]; then
     XDG_CONFIG_HOME="${HOME}/.config"
 fi
@@ -31,4 +37,7 @@ if [ -d "${xinitdir}" ]; then
 fi
 
 # Start startx display
-exec systemd-inhibit --what=handle-power-key bspwm
+case session in 
+    bspwm) exec systemd-inhibit --what=handle-power-key bspwm               ;;
+    *) exec "${session}"                                                    ;;
+esac

@@ -29,7 +29,6 @@ fix_perm () {
 symlinks_and_directories () {
     # Place symlinks
     echo 'Creating directories and symlinks. . .'
-    mkdir --parents "${HOME}/.cache/"{mpd,isync,mpdscribble,vdirsyncer,newsboat}
     mkdir --parents "${HOME}/.icons/default"
 
     # Fallback values for bash shell

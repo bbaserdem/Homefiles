@@ -35,7 +35,7 @@ print_info () {
         elif [ "${instance}" = 'archive' ] ; then
             instance='data'
         elif [ "${instance}" = 'root' ] ; then
-            instance='filesystem-btrfs'
+            instance='filesystem'
         fi
     fi
     # Utilize some predetermined quantifiers
@@ -59,9 +59,9 @@ print_info () {
     elif [ "${instance}" = 'windows' ] ; then
         pre=' '
         dir="/mnt/windows"
-    elif [ "${instance}" = 'filesystem-btrfs' ] ; then
+    elif [ "${instance}" = 'filesystem' ] ; then
         pre='פּ '
-        dir="/mnt/filesystem-btrfs"
+        dir="/mnt/filesystem"
         txt="FS: "
     elif [ "${instance}" = 'quit' ] ; then
         empty_output

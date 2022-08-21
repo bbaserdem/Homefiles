@@ -5,6 +5,9 @@
 trap 'exit' INT TERM
 trap 'kill 0' EXIT
 
+# Buffer duration to stagger; in milliseconds
+_bufdur=200
+
 ###################################
 #          _                 _    #
 #  ___ ___| |_ _ _ _ ___ ___| |_  #
@@ -60,14 +63,26 @@ print_info () {
     formatted_output
 }
 print_loop () {
-    while : ; do
-        print_info || exit
-        # Wait for one line; then chillax a bit
-        ( ip monitor & echo "${!}" && wait ) | ( 
-            trap 'kill "${thispid}"; trap - EXIT' EXIT
-            thispid="$(head -1)"
-            grep --max-count=1 --quiet --line-buffered ''
-        )
-        sleep .2
-    done
+    # Wrapper on listener that will do staggered prints
+    # Subscribe to listener; and capture all stdin and stderr
+    # First echo'd line will be the PID; so we can avoid orphans
+    (ip monitor 2>&1 & echo "${!}" && wait) | (
+        # Trap to kill the listener if parser loop is done
+        trap 'kill "${_thispid}"; trap - EXIT' EXIT
+        read -r _thispid
+        # Do first line of printing, and record the time.
+        print_info && _last="$(($(date '+%s%3N') - _bufdur))" || exit
+        # Loop until listener breaks
+        while ps -o pid= -p "${_thispid}" >/dev/null 2>&1 ; do
+            # Wait until event
+            grep --max-count=1 --quiet --line-buffered
+            _curr="$(date '+%s%3N')"
+            # Print only if the time between last and now is beyond buffer
+            if [ "$((_curr - _last))" -ge "${_bufdur}" ] ; then
+                print_info && _last="${_curr}" || exit
+                # Schedule another line of printing to refresh after buffer
+                ( sleep "${_bufdur}e-3s" ; print_info ) &
+            fi
+        done
+    )
 }

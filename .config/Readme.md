@@ -63,5 +63,3 @@ To install and activate zimfw;
 * Get the `zimfw.zsh` there;
 `curl -fsSL https://raw.githubusercontent.com/zimfw/zimfw/master/zimfw.zsh -o ~/.local/share/zim/zimfw.zsh`
 * Run `zsh ~/.local/share/zim/zimfw.zsh install`
-
-## GPG
