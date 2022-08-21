@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Configure
 bspc config border_width                2
@@ -11,6 +11,30 @@ bspc config borderless_monocle          true
 bspc config gapless_monocle             true
 bspc config automatic_scheme            longest_side
 bspc config external_rules_command      "${XDG_CONFIG_HOME}/bspwm/external_rules.sh"
+
+# Run all system xinitrc shell scripts
+xinitdir="/etc/X11/xinit/xinitrc.d"
+if [ -d "${xinitdir}" ]; then
+    for script in "${xinitdir}/"*; do
+        if [ -x "${script}" ] && [ ! -d "${script}" ]; then
+            . "${script}"
+        fi
+    done
+fi
+unset xinitdir
+unset script
+# Load session file
+if [ -x  "${XDG_CONFIG_HOME}/X11/session" ] ; then
+    . "${XDG_CONFIG_HOME}/X11/session"
+fi
+# Merge xresources
+if [ -f "${XDG_CONFIG_HOME}/X11/resources" ] ; then
+    xrdb -merge "${XDG_CONFIG_HOME}/X11/resources"
+fi
+# SEt keymap
+if [ -f "${XDG_CONFIG_HOME}/X11/keymap" ] ; then
+    setxkbmap $(cat "${XDG_CONFIG_HOME}/X11/keymap")
+fi
 
 # Set XDG_CURRENT_DESKTOP for mimetypes
 export XDG_CURRENT_DESKTOP="bspwm"
@@ -26,9 +50,6 @@ bspwm-layout.sh
 
 # Tell autorandr to chill
 touch "${XDG_CACHE_HOME}/autorandr_chill"
-
-# Turn bell off
-xset b off
 
 # Autostart programs
 dex --autostart --environment bspwm
