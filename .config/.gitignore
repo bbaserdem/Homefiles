@@ -73,7 +73,9 @@
 
 # BSPWM: Accept all
 !/bspwm
-!/bspwm/**
+!/bspwm/bsctl
+!/bspwm/bspwmrc
+!/bspwm/external_rules.sh
 
 # CURSOR: Accept all
 !/cursor
@@ -176,6 +178,10 @@
 !/mpd
 !/mpd/mpd.conf
 
+# MPDRIS2: Get config
+!/mpDris2
+!/mpDris2/mpDris2.conf
+
 # MPV: Only grab config
 !/mpv
 !/mpv/mpv.conf
@@ -250,6 +256,10 @@
 # RAMBOX: Only copy the themes
 !/pacman
 !/pacman/**
+
+# RIVER: Grab all
+!/river
+!/river/**
 
 # ROFI: Grab user made files and scripts
 !/rofi

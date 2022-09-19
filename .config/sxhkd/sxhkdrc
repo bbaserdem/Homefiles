@@ -36,7 +36,7 @@ super + Return
 
 # Dropdown terminal
 F12
-    bspwm-dropdown.sh
+    bspwmctl dropdown
 
 # Keyboard layout changes
 Hyper_R + F12
@@ -60,7 +60,7 @@ super + p
 
 # Music controls for mpd
 XF86Audio{Play,Stop,Next,Prev}
-    /usr/bin/mpc{ toggle, stop, next,-prev}
+    playerctl{ play-pause, stop, next,-prev}
 
 super + plus
     /usr/bin/mpc sendmessage ratings like
@@ -70,7 +70,7 @@ super + minus
 
 # Volume controls
 XF86Audio{Raise,Lower}Volume + {_,alt}
-    pulse-change_volume.sh -p { ,-r} { ,-s} 5 
+    pulse-change_volume.sh { ,-r} { ,-s} -p 5
 
 XF86AudioMute + {_,alt}
     /usr/bin/pactl {set-sink-mute @DEFAULT_SINK@,set-source-mute @DEFAULT_SOURCE@} toggle
@@ -92,7 +92,7 @@ XF86PowerOff
 
 # Change wallpapers
 super + c
-    bspwm-wallpaper.sh
+    sbp-wallpaper.sh
 
 # Lock screen
 super + Escape
@@ -106,13 +106,11 @@ Print + super
 
 # Reload config files
 super + shift + Escape
-    pkill -USR1 -x sxhkd ; \
-    bspwm-layout.sh ; \
-    bspwm-barlauncher.sh
+    bspwmctl refresh
 
 # Logout
 super + shift + alt + Escape
-    bspwm-exit.sh
+    bspwmctl exit
 
 # Open python terminal
 XF86Calculator

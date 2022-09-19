@@ -9,6 +9,6 @@ Terminal=false
 Type=Application
 Categories=Utility;
 StartupNotify=true
-Hidden=true
+Hidden=false
 X-GNOME-Autostart-enabled=false
 OnlyShowIn=bspwm

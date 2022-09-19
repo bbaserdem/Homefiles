@@ -13,27 +13,13 @@ if [ "${XDG_CURRENT_DESKTOP}" = 'bspwm' ] ; then
     
     chill_file="${XDG_CACHE_HOME}/autorandr_chill"
     if [ -f "${chill_file}" ] ; then
-        # Bspwm just loaded; don't mess wallpaper or layout, just undo the chill
+        # Bspwm just loaded; just undo the chill
         rm --force "${chill_file}"
     else
-        # Refresh the window layout
-        if [ -x "${HOME}/.local/bin/bspwm-layout.sh" ] ; then
-            bspwm-layout.sh
-        fi
-        # Change wallpaper instances
-        if [ -x "${HOME}/.local/bin/bspwm-wallpaper.sh" ] ; then
-            bspwm-wallpaper.sh
-        fi
+        # Refresh desktop
+        bspwmctl refresh
+        # Send notification
+        notify-send 'Autorandr' 'BSPWM: refreshed layout' --icon=display
     fi
 
-    # Launch polybar instances
-    if [ -x "${HOME}/.local/bin/bspwm-barlauncher.sh" ] ; then
-        bspwm-barlauncher.sh
-    fi
-
-    # Send notification
-    notify-send \
-        "Autorandr" \
-        "BSPWM: layout is ${AUTORANDR_CURRENT_PROFILE}"\
-        --icon=display
 fi

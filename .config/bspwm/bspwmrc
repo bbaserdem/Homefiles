@@ -1,55 +1,417 @@
-#!/bin/sh
+#!/bin/bash
 
-# Configure
-bspc config border_width                2
-bspc config window_gap                  12
-bspc config merge_overlapping_monitors  true
-bspc config remove_disabled_monitors    true
-bspc config remove_unplugged_monitors   true
-bspc config split_ratio                 0.52
-bspc config borderless_monocle          true
-bspc config gapless_monocle             true
-bspc config automatic_scheme            longest_side
-bspc config external_rules_command      "${XDG_CONFIG_HOME}/bspwm/external_rules.sh"
+# BSPWM helper commands
+print_help () {
+    echo 'Usage: bspwmctl [OPTION] CMD'
+    echo 'BSPWM configuration and setup script for user sbp'
+    echo 'Example: bspwmctl reload (reloads bspwm configuration only)'
+    echo 'If options are uspecified, runs X11 scripts and full config.'
+    echo 'Specifying options only runs the specified options in order.'
+    echo ''
+    echo 'Options:'
+    echo '  help        : Display this information'
+    echo '  autostart   : Autostart userspace applications'
+    echo '  config      : Run bspwm config commands'
+    echo '  dropdown    : Toggle dropdown terminal'
+    echo '  exit        : Close desktop and exit bspwm'
+    echo '  infobar     : Draw, or relaunch information bars'
+    echo '  layout      : Set workspace layout'
+    echo '  load        : Load various runtime config information'
+    echo '  lock        : Activate screen locker'
+    echo '  refresh     : Refresh (layout and sxhkd)'
+    echo '  save        : Save various runtime config information'
+    echo '  x11         : Run X11 scripts'
+}
 
-# Run all system xinitrc shell scripts
-xinitdir="/etc/X11/xinit/xinitrc.d"
-if [ -d "${xinitdir}" ]; then
-    for script in "${xinitdir}/"*; do
-        if [ -x "${script}" ] && [ ! -d "${script}" ]; then
-            . "${script}"
+# Create log location if does not exist
+if [ -n "${XDG_DATA_HOME}" ] ; then
+    _log_dir="${XDG_DATA_HOME}/bspwm"
+else
+    _log_dir="/tmp/bspwm-${USER}"
+fi
+
+# Create subdirectories
+if [ ! -e "${_log_dir}" ] ; then
+    mkdir -p "${_log_dir}"
+elif [ ! -d "${_log_dir}" ] ; then
+    echo "Log directory occupied by file"
+    exit 2
+fi
+
+# BSPWM config
+bspwm_config () {
+    bspc config external_rules_command      "${HOME}/.config/bspwm/external_rules.sh"
+    # Looks and feel
+    bspc config border_width                0
+    bspc config borderless_monocle          false
+    bspc config gapless_monocle             false
+    bspc config window_gap                  16
+    # Monitor behavior
+    bspc config merge_overlapping_monitors  true
+    bspc config ignore_ewmh_focus           false
+    bspc config ignore_ewmh_struts          false
+    bspc config remove_disabled_monitors    true
+    bspc config remove_unplugged_monitors   true
+    # Splitting behavior
+    bspc config automatic_scheme            longest_side
+    bspc config center_pseudo_tiled         true
+    bspc config directional_focus_tightness low
+    bspc config removal_adjustment          true
+    bspc config single_monocle              false
+    bspc config split_ratio                 0.6
+}
+
+bspwm_layout () {
+    # Layout
+    [ -z "${ws1}" ] && ws0='I' 
+    [ -z "${ws2}" ] && ws1='II'  
+    [ -z "${ws3}" ] && ws2='III' 
+    [ -z "${ws4}" ] && ws3='IV'  
+    [ -z "${ws5}" ] && ws4='V' 
+    [ -z "${ws6}" ] && ws5='VI'  
+    [ -z "${ws7}" ] && ws6='VII' 
+    [ -z "${ws8}" ] && ws7='VIII'
+    [ -z "${ws9}" ] && ws8='IX'  
+    [ -z "${ws0}" ] && ws9='X'
+    _primary="$(bspc query --monitors --monitor primary --names)"
+    _i='0'
+    bspc query --monitors --names | while read -r _monitor ; do
+        # Create main workspaces on primary monitor
+        if [ "${_monitor}" = "${_primary}" ] ; then
+            bspc monitor primary --reset-desktops \
+                "${ws1}" "${ws2}" "${ws3}" "${ws4}" "${ws5}" \
+                "${ws6}" "${ws7}" "${ws8}" "${ws9}" "${ws0}"
+        # Put only one desktop on other monitors, and name it accordingly
+        else
+            _i="$((_i + 1))"
+            case "${_i}" in
+                1) _icon="" ;;
+                2) _icon="" ;;
+                3) _icon="" ;;
+                4) _icon="" ;;
+                5) _icon="" ;;
+                6) _icon="" ;;
+                7) _icon="" ;;
+                8) _icon="" ;;
+                9) _icon="" ;;
+                *) _icon="${_i}" ;;
+            esac
+            bspc monitor "${_monitor}" --reset-desktops "${_icon}"
         fi
     done
+
+}
+
+# BSPWM dropdown terminal
+bspwm_dropdown () {
+    # Constants
+    _name='Dropdown terminal'
+    _logf="${_log_dir}/dropdown.at-${DISPLAY}.log"
+
+    # Try to get WID and PID of dropdown terminal
+    _wid=''
+    _wid="$(xdotool search --class "${_name}" | head --lines 1)"
+    if [ -n "${_wid}" ] ; then
+        _pid="$(xdotool getwindowpid "${_wid}")"
+    else
+        # If we don't have a WID; try spawning a terminal
+        nohup /usr/bin/kitty --class "${_name}" >"${_logf}" 2>&1 &
+        _pid="${!}"
+        # If we can't get PID; it was probably launched, we are waiting on WID
+        _i=0
+        while [ -z "${_wid}" ] && [ "${_i}" -lt 10 ] ; do
+            sleep .2
+            _wid="$(xdotool search --class "${_name}" | head --lines 1)"
+            _i="$((_i + 1))"
+        done
+        # Give up if we could not find things
+        if [ -z "${_wid}" ] ; then
+            echo 'Dont have wid; giving up'
+            exit 1
+        fi
+    fi
+    # Get terminal status
+    _info="$(bspc query --node "${_wid}" --tree)"
+    _hidden="$(jq --raw-output --compact-output --monochrome-output \
+        --null-input --argjson tree "${_info}" '$tree.hidden')"
+    if [ "${_hidden}" = 'true' ] ; then
+    # Reshape for the active window; and focus
+        _dim="$(bspc query --monitor focused --tree | jq --raw-output \
+            --compact-output --monochrome-output --argjson current "${_info}" ' {
+            offX:    ( .rectangle.x      + .padding.left                    ),
+            dimX:    ( .rectangle.width  - .padding.right  - .padding.left  ),
+            offY:    ( .rectangle.y      + .padding.top                     ),
+            dimY:    ( .rectangle.height - .padding.bottom - .padding.top   )}|{
+            tgtoffX: ( .offX + ((.dimX - (.dimX % 40)) / 40))   ,
+            curoffX: $current.client.floatingRectangle.x        ,
+            tgtdimX: ((.dimX - (.dimX % 20)) * (20 - 1) / 20)   ,
+            curdimX: $current.client.floatingRectangle.width    ,
+            tgtoffY: .offY                                      ,
+            curoffY: $current.client.floatingRectangle.y        ,
+            tgtdimY: ((.dimY - (.dimY % 3)) / 3)                ,
+            curdimY: $current.client.floatingRectangle.height   } | {
+            old: { x: .curoffX, y: .curoffY, w: .curdimX, h: .curdimY   },
+            new: { x: .tgtoffX, y: .tgtoffY, w: .tgtdimX, h: .tgtdimY   },
+            delta: {
+            x:  ( .tgtoffX - .curoffX ),    y:  ( .tgtoffY - .curoffY ),
+            w:  ( .tgtdimX - .curdimX ),    h:  ( .tgtdimY - .curdimY )}}')"
+        _delx="$(jq --raw-output --null-input --argjson dim "${_dim}" '$dim.delta.x')"
+        _dely="$(jq --raw-output --null-input --argjson dim "${_dim}" '$dim.delta.y')"
+        _delw="$(jq --raw-output --null-input --argjson dim "${_dim}" '$dim.delta.w')"
+        _delh="$(jq --raw-output --null-input --argjson dim "${_dim}" '$dim.delta.h')"
+        # Move window to correct position
+        bspc node "${_wid}" --move                  "${_delx}" "${_dely}"
+        bspc node "${_wid}" --resize bottom_right   "${_delw}" "${_delh}"
+        # Toggle hidden state and focus
+        bspc node "${_wid}" --flag hidden=off --flag sticky=on --focus
+    else
+        # Hide
+        bspc node "${_wid}" --flag hidden=on
+    fi
+}
+
+# Close bspwm 
+bspwm_exit () {
+    # Save configuration
+    bspwm_save
+    # Send kill signal to all orphans on our display
+    if [ -n "${USER}" ] && [ -n "${DISPLAY}" ] ; then
+        pgrep --uid="${USER}" --parent=1 | while IFS= read -r _pid ; do
+            # Skip us; in case we are orphan 
+            if [ "${_pid}" = "$$" ] ; then
+                continue
+            fi
+            # SKip bspwm in case it's an orphan
+            _name="$(ps --pid "${_pid}" --format comm=)"
+            if [ "${_name}" = 'bspwm' ] ; then
+                continue
+            fi
+            # Skip if DISPLAY is not our display
+            _disp="$(tr '\0' '\n' < "/proc/${_pid}/environ" | \
+                awk --field-separator '=' '/DISPLAY/ {print $2}')"
+            if [ "${_disp}" != "${DISPLAY}" ] ; then
+                continue
+            fi
+            # Send kill signal to this process
+            kill "${_pid}"
+        done
+    fi
+    # Send end signal
+    bspc quit
+}
+
+# Launch user bars
+bspwm_infobar () {
+    # Fail if DISPLAY is not set
+    if [ -z "${DISPLAY}" ] ; then
+        echo "DISPLAY not set; must be run from X graphical session."
+        exit 1
+    fi
+
+    # Run this code block
+    ( flock 3
+        #---Kill all running polybars on this display
+        pgrep 'polybar' | while IFS= read -r _pid ; do
+            if [ "${_pid}" != "$$" ] ; then
+                # Check if DISPLAY variable of this instance is the same with ours,
+                # and terminate that bar if it is
+                _dvar="$( \
+                ( tr '\0' '\n' | awk -F '=' '/DISPLAY/ {print $2}' ) \
+                    < "/proc/${_pid}/environ")"
+                if [ "${_dvar}" = "${DISPLAY}" ]; then
+                    # Set a waiter for this bar to exit, and send kill signal
+                    wait "${_pid}" & kill "${_pid}"
+                fi
+            fi
+        done
+        # Wait until all signaled bars exit gracefully
+        wait
+
+        #---Get name of primary monitor from bspwm, fallback to first if no primary
+        _primon="$(bspc query --names --monitors --monitor primary)"
+        if [ -z "${_primon}" ] ; then
+            _primon="$(bspc query --names --monitors | head -n 1)"
+        fi
+
+        #---Launch polybar on all monitors
+        polybar --list-monitors | while IFS= read -r _pom ; do
+            #--Log location, and clean the log if exists
+            _mon="$(echo "${_pom}" | awk -F '[ ,:]' '{print $1}')"
+            _nam="bar.on-${_mon}.at-${DISPLAY}"
+            find "${_log_dir}" -name "${_nam}*" -exec rm --force {} \;
+            #--Get log name and monitor info
+            _log="${_log_dir}/${_nam}"
+            export POLYMON="${_mon}"
+
+            #--Determine if we are high-def
+            _hor="$(echo "${_pom}" | sed 's|.* \([0-9]\+\)x[0-9]\+.*|\1|')"
+            if [ "${_hor}" -gt '2000' ] ; then
+                _suf='-hi'
+            else
+                _suf=''
+            fi
+
+            #--Launch bars, and orphan them so they can still operate
+            if [ "${_mon}" = "${_primon}" ] ; then
+                # Launch the main bars
+                nohup polybar --reload "bspwm-top${_suf}" >"${_log}.top" 2>&1 &
+                nohup polybar --reload "bspwm-bot${_suf}" >"${_log}.bot" 2>&1 &
+            else
+                # Launch an auxiliary bar
+                nohup polybar --reload "bspwm-aux${_suf}" >"${_log}.aux" 2>&1 &
+            fi
+        done
+
+        # Close the file lock placed
+        flock --unlock 3
+    ) 3>"${_log_dir}/bars.at.${DISPLAY}.lock"
+
+    # Remove our lock once we are done
+    rm --force "${_log_dir}/bars.at.${DISPLAY}.lock"
+}
+
+# BSPWM lock implementation
+bspwm_lock () {
+    # Arguments to go in
+    _img="${_log_dir}/lockscreen.at-${DISPLAY}.png"
+    _args="--image=${_img}"
+    _args="${_args} --pointer=default"
+    _args="${_args} --ignore-empty-password"
+    _args="${_args} --show-failed-attempts"
+    _args="${_args} --indicator"
+    _args="${_args} --keylayout=0"
+    _args="${_args} --clock"
+    _args="${_args} --pass-power-keys"
+    _args="${_args} --pass-media-keys"
+    _args="${_args} --pass-screen-keys"
+    _args="${_args} --radius=180"
+    _args="${_args} --bar-indicator"
+    _args="${_args} --bar-base-width=50"
+    # Create screenshot and blur it
+    maim | convert - -scale 10% -scale 1000% "${_img}"
+    # Check to see if we inherited the file lock from XSS lock
+    if [ -n "${XSS_SLEEP_LOCK_FD}" ] && [ -e "/dev/fd/${XSS_SLEEP_LOCK_FD}" ] ; then
+        # Will do a (forking) lock while disinheriting the fd lock
+        i3lock ${_args} "${XSS_SLEEP_LOCK_FD}"<&- || true
+        # Use bash build-in to close file descriptor to sleep
+        exec "${XSS_SLEEP_LOCK_FD}"<&-
+    else
+        #  Just do a forking lock
+        i3lock ${_args} || true
+    fi
+    # Remove the screenshot
+    rm "${_img}"
+}
+
+# Autostarting applications
+bspwm_autostart () {
+    # BSPWM specific applications
+    dex --autostart --environment bspwm
+}
+
+bspwm_load () {
+    # Load light config
+    light -I
+    # Load last wallpaper
+    sbp-wallpaper.sh reload
+}
+
+# Save and load some external config
+bspwm_save () {
+    # Save light config
+    light -O
+    # Save wallpaper config
+    sbp-wallpaper.sh reload
+}
+
+# X11 scripts
+bspwm_x11 () {
+    # Run all system xinitrc shell scripts
+    xinitdir="/etc/X11/xinit/xinitrc.d"
+    if [ -d "${xinitdir}" ]; then
+        for script in "${xinitdir}/"*; do
+            if [ -x "${script}" ] && [ ! -d "${script}" ]; then
+                source "${script}"
+            fi
+        done
+    fi
+    unset xinitdir
+    unset script
+    # Load session file
+    if [ -x  "${XDG_CONFIG_HOME}/X11/session" ] ; then
+        source "${XDG_CONFIG_HOME}/X11/session"
+    fi
+    # Merge xresources
+    if [ -f "${XDG_CONFIG_HOME}/X11/resources" ] ; then
+        xrdb -merge "${XDG_CONFIG_HOME}/X11/resources"
+    fi
+    # Set keymap
+    if [ -f "${XDG_CONFIG_HOME}/X11/keymap" ] ; then
+        setxkbmap $(cat "${XDG_CONFIG_HOME}/X11/keymap")
+    fi
+    # Set XDG_CURRENT_DESKTOP
+    export XDG_CURRENT_DESKTOP="bspwm"
+    # Fix Java apps
+    export _JAVA_AWT_WM_NONREPARENTING=1
+    # Tell autorandr to chill
+    touch "${XDG_CACHE_HOME}/autorandr_chill"
+    echo 'Managed to run X11 scripts'
+}
+
+# Run as starting script, or take arguments
+bspwm_startup () {
+    # BSPWM configuration
+    bspwm_x11
+    bspwm_config
+    bspwm_layout
+    bspwm_load
+    bspwm_autostart
+    bspwm_infobar
+}
+# Reload bspwm
+bspwm_refresh () {
+    # Find and reload our sxhkd
+    pgrep 'sxhkd' | while IFS= read -r _pid ; do
+        if [ "${_pid}" != "$$" ] ; then
+            # Check if DISPLAY variable of this instance is the same with ours,
+            # and terminate that bar if it is
+            _dvar="$( \
+                ( tr '\0' '\n' | awk -F '=' '/DISPLAY/ {print $2}' ) \
+                < "/proc/${_pid}/environ")"
+            if [ "${_dvar}" = "${DISPLAY}" ]; then
+                # Reload this sxhkd
+                kill -USR1 "${_pid}"
+            fi
+        fi
+    done
+    # Redo config and layout
+    bspwm_config
+    bspwm_layout
+    bspwm_load
+    bspwm_infobar
+}
+
+if [ -z "${1}" ] ; then
+    # Reload configuration
+    bspwm_refresh
+else
+    # Respond with arguments
+    case "${1}" in
+        0)          bspwm_startup   ;;
+        autostart)  bspwm_autostart ;;
+        config)     bspwm_config    ;;
+        dropdown)   bspwm_dropdown  ;;
+        exit)       bspwm_exit      ;;
+        infobar)    bspwm_infobar   ;;
+        layout)     bspwm_layout    ;;
+        load)       bspwm_load      ;;
+        lock)       bspwm_lock      ;;
+        refresh)    bspwm_refresh   ;;
+        save)       bspwm_save      ;;
+        help)       print_help      ;;
+        *)  echo    "Unknown option: <${1}>"
+            print_help
+            exit 1
+            ;;
+    esac
 fi
-unset xinitdir
-unset script
-# Load session file
-if [ -x  "${XDG_CONFIG_HOME}/X11/session" ] ; then
-    . "${XDG_CONFIG_HOME}/X11/session"
-fi
-# Merge xresources
-if [ -f "${XDG_CONFIG_HOME}/X11/resources" ] ; then
-    xrdb -merge "${XDG_CONFIG_HOME}/X11/resources"
-fi
-# SEt keymap
-if [ -f "${XDG_CONFIG_HOME}/X11/keymap" ] ; then
-    setxkbmap $(cat "${XDG_CONFIG_HOME}/X11/keymap")
-fi
-
-# Set XDG_CURRENT_DESKTOP for mimetypes
-export XDG_CURRENT_DESKTOP="bspwm"
-
-# Fix Java apps
-export _JAVA_AWT_WM_NONREPARENTING=1
-
-# Reload background
-bspwm-wallpaper.sh reload
-
-# Refresh layouts
-bspwm-layout.sh
-
-# Tell autorandr to chill
-touch "${XDG_CACHE_HOME}/autorandr_chill"
-
-# Autostart programs
-dex --autostart --environment bspwm

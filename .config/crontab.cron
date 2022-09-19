@@ -2,4 +2,4 @@
 */5     *       *       *       *       isync-mailboxes-update.sh
 */5     *       *       *       *       vdirsyncer sync contacts
 */5     *       *       *       *       vdirsyncer sync calendar
-0       *       *       *       *       bspwm-wallpaper
+0       *       *       *       *       bspwm-wallpaper.sh

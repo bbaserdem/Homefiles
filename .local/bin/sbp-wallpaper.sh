@@ -2,6 +2,8 @@
 # This script refreshes backdrop of desktops when called
 # Either say refresh; which then refreshes background,
 # Or theme; which only grabs the correct themed wallpaper
+# Currently only works with X11;
+# TODO: Add wayland support to use swaybg
 imfind_dir () {
     find "${1}" -type f -a '(' \
         -iname "${_theme}*.jpg"  -o \

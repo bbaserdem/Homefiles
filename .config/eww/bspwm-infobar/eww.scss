@@ -52,31 +52,44 @@ $cyan:      $base0C;
 $blue:      $base0D;
 $magenta:   $base0E;
 $brown:     $base0F;
+$dim_amnt:  75%;
+
+// Mass control
+$border_rad:    8px;
 
 // EWW BAR
+.leftbar-area{
+    font-family: "statusbar";
+    font-size: 1.2em;
+    padding: 6px 0px 6px 6px;
+}
 .bar-left{
     background-color: $background;
-    padding: .3rem;
-    border-radius: 5px;
+    border-radius: $border_rad;
+}
+.bar-left-top{
+    padding: .75rem 0 0 0;
+}
+.bar-left-bot{
+    padding: 0 0 .75rem 0;
 }
 
+// Separators
+.separator {
+    color: $base02;
+}
 
 // Workspaces
 .workspaces {
     font-family: "statusbar";
-    padding: .2rem .7rem .2rem .7rem;
-    background-color: $black;
-    border-radius: 5px;
+    padding: .2rem .5rem .2rem .5rem;
 }
 .desktop-monocle, .desktop-tiled{
     color: $cyan;
     font-family: "statusbar";
-    font-size: 1.7em;
-    padding: 1rem 0 1rem 0;
 }
 .desktop-focused, .desktop-urgent, .desktop-occupied, .desktop-unoccupied{
-    margin: .55rem 0 .55rem 0;
-    font-size: 1.7em;
+    margin: .3rem 0 .3rem 0;
 }
 .desktop-unoccupied {
     color: $gray;
@@ -88,5 +101,31 @@ $brown:     $base0F;
     color: $orange;
 }
 .desktop-focused {
+    font-weight: bold;
     color: $white;
+}
+
+// Clock and time
+.clock {
+    font-family: "statusbar";
+    padding: .2rem .5rem .2rem .5rem;
+    font-weight: bold;
+}
+.clock-icon {
+    margin: .2rem 0 .2rem 0;
+    color: $cyan;
+    font-weight: bold;
+}
+.clock-hour, .clock-minute, .clock-second {
+    color: $foreground;
+}
+.date {
+    font-family: "statusbar";
+    padding: .2rem .5rem .2rem .5rem;
+    font-weight: bold;
+}
+.date-icon {
+    margin: .2rem 0 .2rem 0;
+    color: $orange;
+    font-weight: bold;
 }

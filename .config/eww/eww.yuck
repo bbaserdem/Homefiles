@@ -1,64 +1,28 @@
-(defwidget greeter [?text name]
-  (box  :orientation "horizontal"
-        :halign "center"
-    text
-    (button :onclick "notify-send 'Hello' 'Hello, ${name}'"
-      "Greet"
-    )
-  )
-)
+;; INFO-BAR
+;;╔═════════════════════════════════════════════════════════════════════════╗;;
+;;║                  _____        __   .  _                                 ║;;
+;;║                 |_   _|      / _|    | |                                ║;;
+;;║                   | |  _ __ | |_ ___ | |__   __ _ _ __                  ║;;
+;;║                   | | | '_ \|  _/ _ \| '_ \ / _` | '__|                 ║;;
+;;║                  _| |_| | | | || (_) | |_) | (_| | |                    ║;;
+;;║                 |_____|_| |_|_| \___/|_.__/ \__,_|_|                    ║;;
+;;╚═════════════════════════════════════════════════════════════════════════╝;;
+;; Load common modules
+;;(include "$XDG_CONFIG_HOME/eww/eww.yuck")
+;;╔═════════════════════════════════════════════════════════════════════════╗;;
+;;║                                 Widgets                                 ║;;
+;;╚═════════════════════════════════════════════════════════════════════════╝;;
 
-(defvar thisname "Lol")
+;; Separators
+(defwidget sep-ver-line []
+  (box
+    :vexpand false
+    :hexpand false
+    (label
+      :class "separator"
+      :text "|"
+      :angle 90)))
 
-(defwidget top []
-  (box
-      :orientation "v"
-      :space-evenly "false"
-      :valign "start"
-    "Here"
-    "There"
-    (greeter
-        :text thisname
-        :name "Sbp"
-    )
-  )
-)
-(defwidget bottom []
-  (box
-      :orientation "v"
-      :space-evenly "false"
-      :valign "start"
-    "But"
-    "We"
-    "Here"
-  )
-)
-(defwidget bar []
-  (box
-      :class "eww_bar"
-      :orientation "v"
-      :vexpand "false"
-      :hexpand "false"
-    (top)
-    (bottom)
-  )
-)
-
-(defwindow bar
-    :monitor 0
-    :geometry (geometry
-        :x "0"
-        :y "0"
-        :width "47px"
-        :height "100%"
-        :anchor "left center"
-    )
-    :stacking "fg"
-    :reserve (struts
-        :distance "40px"
-        :side "left"
-    )
-    :windowtype "dock"
-    :wm-ignore false
-  (bar)
-)
+;;╔═════════════════════════════════════════════════════════════════════════╗;;
+;;║                                 Windows                                 ║;;
+;;╚═════════════════════════════════════════════════════════════════════════╝;;
