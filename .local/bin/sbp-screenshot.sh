@@ -12,6 +12,12 @@
 #   Use ∶ (UTF-8 glyph) instead of colon (:) because android can't use it
 #   Android string reservedChars = "?:\"*|/\\<>";
 
+# Get pictures directory
+_base="$(xdg-user-dir PICTURES)"
+if [ -z "${_base}" ] || [ "${_base}" = "${HOME}" ] ; then
+    _base="${HOME}/Pictures"
+fi
+
 # Get the screenshots directory
 case "$(uname -n)" in
     *-laptop)   this_comp="/Laptop" ;;
@@ -20,7 +26,7 @@ case "$(uname -n)" in
     *-server)   this_comp="/Server" ;;
     *)          this_comp="/PC"     ;;
 esac
-screendir="${HOME}/Pictures/Screenshots/${this_comp}"
+screendir="${_base}/Screenshots/${this_comp}"
 if [ ! -e "${screendir}" ] ; then mkdir -p "${screendir}" ; fi
 timestamp="$(date '+%Y-%m-%d_%Hh%Mm%Ss')"
 

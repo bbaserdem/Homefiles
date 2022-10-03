@@ -7,7 +7,6 @@
 #   -c to specify the channel name (default is the default channel)
 #   -p for percentage to modulate (default 5)
 #   -m for setting maximum percentage (default 100)
-
 _direction='+'
 _interface='sink'
 _stpvol='5'
@@ -29,29 +28,16 @@ if [ -z "${_name}" ] ; then
     _name="$(pactl --format=json info | jq --raw-output ".default_${_interface}_name")"
 fi
 
-# Get maximum volume, and the value of the loudest channel
-_info="$(pactl --format=json list "${_interface}s" | \
-    jq --raw-output 'map(select(.name == "'"${_name}"'")) | .[]')"
-_maxval="$(echo "${_info}" | jq --raw-output '.base_volume.value')"
-_curval="$(echo "${_info}" | jq --raw-output '.volume | [.[].value] | max')"
+# Do change
+pactl "set-${_interface}-volume" "${_name}" "${_direction}${_stpvol}%"
 
-# Calculate target volume percentage to see if we need to do clipping
-_stpval="$((_maxval * _stpvol / 100))"
-_maxval="$((_maxval * _maxvol / 100))"
+# Check if we need to clip
 if [ "${_direction}" = '+' ] ; then
-    _newval="$((_curval + _stpval))"
-elif [ "${_direction}" = '-' ] ; then
-    _newval="$((_curval - _stpval))"
-fi
-
-# Modulate volume
-if [ "${_newval}" -lt '0' ] ; then
-    # Lower clipping to 0; not needed
-    pactl "set-${_interface}-volume" "${_name}" '0%'
-elif [ "${_newval}" -ge "${_maxval}" ] ; then
-    # Higher clipping to max
-    pactl "set-${_interface}-volume" "${_name}" "${_maxvol}%"
-else
-    # No clipping
-    pactl "set-${_interface}-volume" "${_name}" "${_direction}${_stpvol}%"
+    _info="$(pactl --format=json list "${_interface}s" | \
+        jq --raw-output 'map(select(.name == "'"${_name}"'")) | .[]')"
+    _maxval="$(echo "${_info}" | jq --raw-output '.base_volume.value')"
+    _curval="$(echo "${_info}" | jq --raw-output '.volume | [.[].value] | max')"
+    if [ "${_curval}" -ge "${_maxval}" ] ; then
+        pactl "set-${_interface}-volume" "${_name}" '100%'
+    fi
 fi
