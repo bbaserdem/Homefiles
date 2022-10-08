@@ -1,0 +1,50 @@
+#----------------------------------#
+#-----HOME DIRECTORY GITIGNORE-----#
+#----------------------------------#
+
+# Ignore all files by default
+*
+!/.gitignore
+
+# Grab local and cache
+!/.config
+!/.config/.gitignore
+!/.local
+!/.local/.gitignore
+
+# Grab profile pictures
+!/.face
+!/.face.icon
+
+# Create the necessary cache directories
+!/.cache/mpd/Readme.md
+!/.cache/newsboat/Readme.md
+
+# Load icons config
+!/.icons
+!/.icons/default
+!/.icons/default/index.theme
+
+# Matlab
+!/.matlab
+
+# X symlinks
+!/.Xkbmap
+!/.xinitrc
+!/.xprofile
+!/.xserverrc
+!/.xsession
+
+# Configs that don't follow XDG_CONFIG_HOME
+!/.gtkrc-2.0
+!/.latexmkrc
+!/.tmux.conf
+
+# Grab some directory structure
+!/Data
+!/Data/Configs
+!/Data/Local
+!/Shares
+!/Shares/Readme.md
+!/Shares/External Drives
+
