@@ -19,6 +19,7 @@
 
 # Grab scripts from bin
 !/bin
+!/bin/bspwmctl
 !/bin/*.sh
 !/bin/*.py
 !/bin/arch-repo*
