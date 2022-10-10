@@ -39,6 +39,8 @@
 !/share/applications
 !/share/applications/thunar-bulk-rename.desktop
 !/share/applications/thunar-settings.desktop
+!/share/mpd
+!/share/mpd/Readme.md
 !/share/ncmpcpp
 !/share/ncmpcpp/lyrics
 !/share/ncmpcpp/lyrics/Readme.md
