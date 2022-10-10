@@ -1,8 +1,5 @@
 #include "themes/base16-eighties.Xresources"
 
-! X11 stuff
-Xcursor.theme: Vimix-cursors
-
 ! Screen stuff
 Xft.dpi: 192
 

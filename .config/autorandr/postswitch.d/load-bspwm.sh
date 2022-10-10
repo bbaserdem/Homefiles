@@ -3,13 +3,10 @@
 # Execute the following if the window manager is bspwm
 if [ "${XDG_CURRENT_DESKTOP}" = 'bspwm' ] ; then
     # Select the xrdb file to read
-    case "${AUTORANDR_CURRENT_PROFILE}" in
-        Homestation-Home|Server)
-            xrdb "${XDG_CONFIG_HOME}/X11/uhd.resources"
-            ;;
-        * )
-            xrdb "${XDG_CONFIG_HOME}/X11/resources"
-    esac
+    xrdb "${XDG_CONFIG_HOME}/X11/resources"
+    if [ "${AUTORANDR_CURRENT_PROFILE}" = 'Work-AtHome' ] ; then
+        xrdb -merge "${XDG_CONFIG_HOME}/X11/uhd.resources"
+    fi
     
     chill_file="${XDG_CACHE_HOME}/autorandr_chill"
     if [ -f "${chill_file}" ] ; then
@@ -21,5 +18,4 @@ if [ "${XDG_CURRENT_DESKTOP}" = 'bspwm' ] ; then
         # Send notification
         notify-send 'Autorandr' 'BSPWM: refreshed layout' --icon=display
     fi
-
 fi

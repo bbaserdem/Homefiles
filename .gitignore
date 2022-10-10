@@ -6,7 +6,7 @@
 *
 !/.gitignore
 
-# Grab local and cache
+# Grab config and local
 !/.config
 !/.config/.gitignore
 !/.local
@@ -17,7 +17,10 @@
 !/.face.icon
 
 # Create the necessary cache directories
+!/.cache
+!/.cache/mpd
 !/.cache/mpd/Readme.md
+!/.cache/newsboat
 !/.cache/newsboat/Readme.md
 
 # Load icons config
@@ -40,12 +43,18 @@
 !/.latexmkrc
 !/.tmux.conf
 
-# Grab some directory structure
+# Grab some directory structure so that these are imported
 !/Data
+!/Data/Readme.md
 !/Data/Configs
 !/Data/Local
+!/Data/Desktop
+!/Data/Desktop/Readme.md
+!/Data/Downloads
+!/Data/Downloads/Readme.md
 !/Media
 !/Shares
-!/Shares/Readme.md
 !/Shares/External Drives
+!/Shares/Public
+!/Shares/Public/Readme.md
 
