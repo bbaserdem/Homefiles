@@ -599,6 +599,10 @@ plugLoader('trouble', {
 -- Vimtex
 g.vimtex_mappings_enabled = 0
 g.vimtex_compiler_method = 'latexmk'
+g.vimtex_view_method = 'zathura'
+g.vimtex_compiler_progname = 'nvr'
+g.vimtex_quickfix_ignore_filters = { 'Underfull', 'Overfull' }
+--g.vimtex_view_zathura_options = 
 --[[
 g.vimtex_compiler_tectonic = {
     options = {
@@ -606,9 +610,6 @@ g.vimtex_compiler_tectonic = {
     },
 }
 --]]
-g.vimtex_view_method = 'zathura'
-g.vimtex_compiler_progname = 'nvr'
---g.vimtex_view_zathura_options = 
 
 
 --[[-----------------------------------------------------------------------]]--

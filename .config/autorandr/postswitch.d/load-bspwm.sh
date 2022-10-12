@@ -4,7 +4,7 @@
 if [ "${XDG_CURRENT_DESKTOP}" = 'bspwm' ] ; then
     # Select the xrdb file to read
     xrdb "${XDG_CONFIG_HOME}/X11/resources"
-    if [ "${AUTORANDR_CURRENT_PROFILE}" = 'Work-AtHome' ] ; then
+    if [ "${AUTORANDR_CURRENT_PROFILE}" = 'Work-AtHome-Hidef' ] ; then
         xrdb -merge "${XDG_CONFIG_HOME}/X11/uhd.resources"
     fi
     
