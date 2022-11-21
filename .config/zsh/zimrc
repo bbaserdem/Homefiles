@@ -31,9 +31,17 @@ zmodule zsh-users/zsh-history-substring-search
 #
 # Prompt
 #
-# Exposes git repository status information to prompts.
-zmodule git-info
 # A customizable version of steeef's prompt theme.
 zmodule steeef
-zmodule romkatv/powerlevel10k
 # }}} End configuration added by Zim install
+zmodule magic-enter
+zmodule pvenv
+zmodule ssh
+zmodule duration-info
+# Exposes git repository status information to prompts.
+zmodule git-info
+zmodule prompt-pwd
+zmodule pacman
+zmodule romkatv/powerlevel10k --use degit
+# Load prompt themes
+zmodule prompt

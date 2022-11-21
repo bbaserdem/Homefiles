@@ -114,7 +114,8 @@ local common_capabilities = vim.lsp.protocol.make_client_capabilities()
 -- Add nvim-cmp
 local cmp_lsp_ok, cmp_lsp = pcall(require, 'cmp_nvim_lsp')
 if cmp_lsp_ok then
-    common_capabilities = cmp_lsp.update_capabilities(common_capabilities)
+    common_capabilities = cmp_lsp.default_capabilities(common_capabilities)
+    common_capabilities.textDocument.completion.completionItem.snippetSupport = true
 end
 
 M.capabilities = common_capabilities

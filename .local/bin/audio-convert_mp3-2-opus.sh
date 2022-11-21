@@ -2,7 +2,9 @@
 # Converts a given mp3 file to opus
 
 input_file="${1}"
-backup_dir="${HOME}/Downloads/Mp3ToOpus-backup"
+downl_dir="$(xdg-user-dir DOWNLOAD)"
+[ -z "${downl_dir}" ] && downl_dir="${HOME}/Downloads"
+backup_dir="${downl_dir}/FlacToOpus-backup"
 mkdir --parents "${backup_dir}"
 
 # Guard

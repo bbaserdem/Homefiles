@@ -61,6 +61,8 @@ super + p
 # Music controls for mpd
 XF86Audio{Play,Stop,Next,Prev}
     playerctl{ play-pause, stop, next,-prev}
+super + XF86Audio{Play,Stop,Next,Prev}
+    mpc{ toggle, stop, next,-prev}
 
 super + plus
     /usr/bin/mpc sendmessage ratings like

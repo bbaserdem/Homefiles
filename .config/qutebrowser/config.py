@@ -1,76 +1,110 @@
+#!/usr/bin/python
+
+"""
+Personal qutebrowser configuration
+"""
+
 from socket import gethostname as ghn
 import datetime
 
-# Prevent GUI settings from overriding
+# Don't load autoconfig
 config.load_autoconfig(False)
 
-# Set things like c.tabs.position = "left"
+# Search engines
 c.url.searchengines = {
-        "DEFAULT"   : "https://duckduckgo.com/?q={}",
-        "ar"        : "https://wiki.archlinux.org/?search={}",
-        "ge"        : "https://wiki.gentoo.org/?search={}",
-        "au"        : "https://aur.archlinux.org/packages/{}",
-        "ma"        : "https://www.mathworks.com/help/matlab/ref/{}.html",
-        "go"        : "https://www.google.com/search?hl=en&q={}",
-        "wi"        : "https://www.wikipedia.org/wiki/{}",
-        "am"        : "https://www.amazon.com/s?k={}",
-        "scp"       : "http://www.scp-wiki.net/scp-{}"
-        }
-# Colorthemes
-css_dark = str(config.configdir) + '/css/dark.css'
-css_lght = str(config.configdir) + '/css/light.css'
-config.bind('<Ctrl-d>', 'config-cycle --temp content.user_stylesheets {0} {1} "" ;; reload'.format(css_dark, css_lght))
-c.colors.webpage.preferred_color_scheme = 'dark'
+    "DEFAULT"   : "https://duckduckgo.com/?q={}",
+    "ar"        : "https://wiki.archlinux.org/?search={}",
+    "ge"        : "https://wiki.gentoo.org/?search={}",
+    "au"        : "https://aur.archlinux.org/packages/{}",
+    "ma"        : "https://www.mathworks.com/help/matlab/ref/{}.html",
+    "go"        : "https://www.google.com/search?hl=en&q={}",
+    "wi"        : "https://www.wikipedia.org/wiki/{}",
+    "am"        : "https://www.amazon.com/s?k={}",
+    "scp"       : "http://www.scp-wiki.net/scp-{}"
+}
 
-c.auto_save.session = True
-c.content.headers.user_agent = "Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0"
-c.editor.command = ["alacritty", "-e", "nvim {}"]
-c.spellcheck.languages = ["en-US"]
-c.tabs.position = "left"
-c.tabs.background = True
-c.tabs.width = "12%"
-c.tabs.last_close = "startpage"
-c.completion.height = "10%"
-# c.confirm_quit = ["always"]
-c.content.javascript.alert = True
-c.content.javascript.can_access_clipboard = False
-c.content.javascript.can_close_tabs = False
-c.content.javascript.can_open_tabs_automatically = False
-c.content.pdfjs = False
-c.content.geolocation = True
-c.downloads.location.prompt = True
-# c.content.cookies.store = False
-
-# Update adblock
-config.bind('<Ctrl-b>', 'adblock-update')
-# MPV to watch streams
-config.bind('m', 'spawn --detach mpv {url}')
-config.bind( 'M', 'hint links spawn --detach mpv {hint-url}')
-# Run rofi
-config.bind(',p', 'spawn --userscript qute-pass --dmenu-invocation rofi')
-config.bind(',P', 'spawn --userscript qute-pass --dmenu-invocation rofi --password-only')
-# Add quickmark
-config.bind('gs', 'set-cmd-text --space :quickmark-add {url}')
-# Use uget
-config.bind('<Ctrl-m>',
-            "prompt-yank -s;;spawn uget-gtk --quiet --folder=Downloads " +
-            "'{primary}';;mode-enter normal",
-            mode='prompt')
-config.bind('<Ctrl-shift-m>',
-            "prompt-yank -s;;spawn uget-gtk '{primary}';;" +
-            "mode-enter normal",
-            mode='prompt')
-
-currentTime = datetime.datetime.now()
-c.content.blocking.enabled = True
-c.content.blocking.method = "both"
-
+# Start page; depending on location
 if (ghn() == "sbp-arch-work") or (ghn() == "sbp-gentoo-work"):
     c.url.default_page = "http://intranet.cshl.edu"
     c.url.start_pages = ["http://intranet.cshl.edu"]
 else:
     c.url.default_page = "https://start.duckduckgo.com/"
     c.url.start_pages = ["https://start.duckduckgo.com/"]
+
+
+# Look and feel
+c.colors.webpage.darkmode.algorithm = 'lightness-cielab'
+c.colors.webpage.darkmode.enabled = True
+c.colors.webpage.darkmode.policy.images = 'smart'
+c.colors.webpage.darkmode.policy.page = 'smart'
+c.colors.webpage.preferred_color_scheme = 'dark'
+c.completion.height = "10%"
+c.completion.scrollbar.padding = 3
+c.completion.scrollbar.width = 10
+c.downloads.position = 'top'
+c.scrolling.bar = 'always'
+c.scrolling.smooth = True
+c.statusbar.position = 'top'
+c.statusbar.show = 'always'
+c.tabs.background = True
+c.tabs.last_close = "startpage"
+c.tabs.position = "left"
+c.tabs.show = 'always'
+c.tabs.title.format = '{aligned_index}{audio}: {current_title}'
+c.tabs.width = "12%"
+
+# Behavior settings
+c.auto_save.session = True
+c.changelog_after_upgrade = 'patch'
+c.confirm_quit = ['always']
+c.content.blocking.enabled = True
+c.content.blocking.method = "both"
+c.content.canvas_reading = False
+c.content.desktop_capture = 'ask'
+c.content.geolocation = 'ask'
+c.content.javascript.alert = True
+c.content.javascript.can_access_clipboard = False
+c.content.javascript.enabled = True
+c.content.javascript.can_close_tabs = False
+c.content.javascript.can_open_tabs_automatically = False
+c.content.media.audio_capture = 'ask'
+c.content.media.audio_video_capture = 'ask'
+c.content.media.video_capture = 'ask'
+c.content.mouse_lock = False
+c.content.pdfjs = False
+c.content.prefers_reduced_motion = True
+c.downloads.location.prompt = True
+c.downloads.location.suggestion = 'both'
+c.downloads.open_dispatcher = 'xdg-open {}'
+c.editor.command = ['kitty', 'nvim', '--cmd', 'normal {line}G{column0}l', '{file}']
+c.input.insert_mode.plugins = True
+c.session.lazy_restore = True
+c.spellcheck.languages = ['en-US', 'tr-TR']
+
+""" KEYBINDS """
+# Update adblock list
+config.bind(',b', 'adblock-update')
+# MPV to watch streams
+config.bind(',m', 'spawn --detach mpv {url}')
+config.bind(',M', 'hint links spawn --detach mpv {hint-url}')
+# Add quickmark
+config.bind(',w', 'set-cmd-text --space :quickmark-add {url}')
+# Insert password
+pass_args = ' --username-target secret --username-pattern "user: (.+)" --dmenu-invocation rofi'
+config.bind(',l', 'spawn --userscript qute-pass' + pass_args)
+config.bind(',L', 'hint inputs userscript qute-pass' + pass_args)
+config.bind(',u', 'spawn --userscript qute-pass --username-only' + pass_args)
+config.bind(',U', 'hint inputs userscript qute-pass --username-only' + pass_args)
+config.bind(',p', 'spawn --userscript qute-pass --password-only' + pass_args)
+config.bind(',P', 'hint inputs userscript qute-pass --password-only' + pass_args)
+# Download using uget
+config.bind(',o', "spawn --detach uget-gtk --quiet --folder=Data/Downloads '{url}'")
+config.bind(',O', "hint links spawn uget-gtk --quiet --folder=Data/Downloads '{hint-url}'")
+config.bind('o', "prompt-yank --sel;;spawn --detach uget-gtk --quiet --folder=Data/Downloads '{primary}';;mode-enter normal", mode='prompt')
+# Colorscheme mapping; use ctrl-d to change theme
+css_dark = str(config.configdir) + '/css/dark.css'
+css_light = str(config.configdir) + '/css/light.css'
+config.bind(',d', 'config-cycle --temp content.user_stylesheets {0} {1} "" ;; reload'.format(css_dark, css_light))
 
 # base16-qutebrowser (https://github.com/theova/base16-qutebrowser)
 # Base16 qutebrowser template by theova
@@ -91,7 +125,6 @@ base0C = "#8abeb7"
 base0D = "#81a2be"
 base0E = "#b294bb"
 base0F = "#a3685a"
-
 # set qutebrowser colors
 c.colors.completion.category.bg = base00
 c.colors.completion.category.border.bottom = base00

@@ -2,7 +2,9 @@
 # Converts a given mp3 file to opus
 
 input_file="${1}"
-backup_dir="${HOME}/Downloads/FlacToOpus-backup"
+downl_dir="$(xdg-user-dir DOWNLOAD)"
+[ -z "${downl_dir}" ] && downl_dir="${HOME}/Downloads"
+backup_dir="${downl_dir}/FlacToOpus-backup"
 mkdir --parents "${backup_dir}"
 
 # Guard
@@ -15,8 +17,5 @@ this_dir="$(dirname "${input_file}")"
 output_file="${this_dir}/${this_name::-5}.opus"
 backup_file="${backup_dir}/${this_name}"
 
-# Do conversion
-ffmpeg -i "${input_file}" -codec:a libopus -b:a 256k -vbr on  "${output_file}"
-
-# Move old file to a backup
-mv "${input_file}" "${backup_file}"
+# Do conversion, and if successful move old file to backup
+ffmpeg -i "${input_file}" -codec:a libopus -b:a 256k -vbr on  "${output_file}" && mv "${input_file}" "${backup_file}"

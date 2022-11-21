@@ -18,6 +18,30 @@ Keybinds.switch_theme = function ()
     -- Some stuff here
 end
 
+-- Some overrides for annoying behavior
+wk.register({
+    ['<PageUp>']    = { '1000<C-U>', 'Move pager up one page'    },
+    ['<PageDown>']  = { '1000<C-D>', 'Move pager down one page'  },
+}, {
+    mode = 'n', -- NORMAL mode
+    prefix = "",
+    buffer = nil,
+    silent = true, -- use `silent` when creating keymaps
+    noremap = false, -- use `noremap` when creating keymaps
+    nowait = false, -- use `nowait` when creating keymaps
+})
+wk.register({
+    ['<PageUp>']    = { '<C-O>1000<C-U>', 'Move pager up one page'    },
+    ['<PageDown>']  = { '<C-O>1000<C-D>', 'Move pager down one page'  },
+}, {
+    mode = 'i', -- NORMAL mode
+    prefix = "",
+    buffer = nil,
+    silent = true, -- use `silent` when creating keymaps
+    noremap = false, -- use `noremap` when creating keymaps
+    nowait = false, -- use `nowait` when creating keymaps
+})
+
 -- Normal mode keymaps
 wk.register({
     w = { name = 'Window navigation',
