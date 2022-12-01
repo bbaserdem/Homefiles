@@ -220,6 +220,7 @@ M.this_setup = require('packer').startup(function(use)
         requires = {
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-cmdline',
+            'hrsh7th/cmp-emoji',
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-nvim-lsp-document-symbol',
@@ -229,7 +230,16 @@ M.this_setup = require('packer').startup(function(use)
             'andersevenrud/cmp-tmux',
             'tamago324/cmp-zsh',
             'ray-x/cmp-treesitter',
-            'onsails/lspkind.nvim'
+            'onsails/lspkind.nvim',
+            'uga-rosa/cmp-dictionary',
+            'dmitmel/cmp-digraphs',
+            'amarakon/nvim-cmp-buffer-lines',
+            'dmitmel/cmp-cmdline-history',
+            'chrisgrieser/cmp-nerdfont',
+            'amarakon/nvim-cmp-lua-latex-symbols',
+            'max397574/cmp-greek',
+            'ray-x/cmp-treesitter',
+            'petertriho/cmp-git',
         }
     }
      -- Snippets

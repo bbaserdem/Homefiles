@@ -31,11 +31,10 @@ else:
     c.url.default_page = "https://start.duckduckgo.com/"
     c.url.start_pages = ["https://start.duckduckgo.com/"]
 
-
 # Look and feel
 c.colors.webpage.darkmode.algorithm = 'lightness-cielab'
 c.colors.webpage.darkmode.enabled = True
-c.colors.webpage.darkmode.policy.images = 'smart'
+c.colors.webpage.darkmode.policy.images = 'never'
 c.colors.webpage.darkmode.policy.page = 'smart'
 c.colors.webpage.preferred_color_scheme = 'dark'
 c.completion.height = "10%"
