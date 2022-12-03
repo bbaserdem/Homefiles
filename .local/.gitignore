@@ -30,8 +30,9 @@
 
 # Grab my custom beets plugins
 !/beets
-!/beets/*
-!/beets/**.py
+!/beets/beetsplug
+!/beets/beetsplug/__init__.py
+!/beets/beetsplug/*.py
 
 # Grab the gnupg symlinks, but nothing else from this directory
 !/gnupg
