@@ -28,6 +28,11 @@
 !/bin/eww
 !/bin/eww/*.sh
 
+# Grab my custom beets plugins
+!/beets
+!/beets/*
+!/beets/**.py
+
 # Grab the gnupg symlinks, but nothing else from this directory
 !/gnupg
 /gnupg/*
