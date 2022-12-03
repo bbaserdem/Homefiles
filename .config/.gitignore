@@ -71,6 +71,12 @@
 !/bash
 !/bash/**
 
+# BEETS: Accept all
+!/beets
+!/beets/config.yml
+!/beets/library.db
+!/beets/state.pickle
+
 # BSPWM: Accept all
 !/bspwm
 !/bspwm/bsctl
