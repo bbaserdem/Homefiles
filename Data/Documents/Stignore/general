@@ -1,0 +1,22 @@
+// Syncthing ignore file
+!/Stignore
+!/Stignore/*
+
+// Don't track any git folders
+(?d).git
+(?d).gitmodules
+
+// Don't track any latex auxillary files
+(?d)*.aux
+(?d)*.bbl
+(?d)*.bcf
+(?d)*.blg
+(?d)*.fdb_latemk
+(?d)*.fls
+(?d)*.lof
+(?d)*.log
+(?d)*.run.xml
+(?d)*.run.toc
+(?d)*.out
+(?d)*.synctex.gz
+(?d)*.xdv

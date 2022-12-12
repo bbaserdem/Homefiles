@@ -72,6 +72,7 @@ c.content.media.video_capture = 'ask'
 c.content.mouse_lock = False
 c.content.pdfjs = False
 c.content.prefers_reduced_motion = True
+c.content.tls.certificate_errors = 'ask-block-thirdparty'
 c.downloads.location.prompt = True
 c.downloads.location.suggestion = 'both'
 c.downloads.open_dispatcher = 'xdg-open {}'

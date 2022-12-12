@@ -76,6 +76,8 @@
 !/beets/config.yml
 !/beets/library.db
 !/beets/state.pickle
+!/beets/beetsplug
+!/beets/beetsplug/*.py
 
 # BSPWM: Accept all
 !/bspwm

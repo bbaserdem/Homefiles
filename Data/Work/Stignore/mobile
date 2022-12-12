@@ -1,0 +1,7 @@
+// Include ignore list
+!/Stignore
+!/Stignore/*
+
+// Need to have access to papers and presentations
+!/Papers
+!/Presentations

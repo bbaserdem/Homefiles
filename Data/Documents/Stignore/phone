@@ -1,0 +1,15 @@
+// Syncthing ignore file
+// Include ignore list
+!/Stignore
+!/Stignore/*
+// Need the files specific for one plus 7 pro, and not for other folders
+!/Software/Android/guacamole/*
+/Software/*
+// Don't need MATLAB here
+/MATLAB
+// We don't sort on the phone; save space instead
+/Sort
+// Only useful game saves would be Stardew Valley
+!/Games/StardewValley
+/Games/*
+/creeperworld3
