@@ -7,7 +7,7 @@ trap 's=$?; echo "$0: Error on line "$LINENO": $BASH_COMMAND"; exit $s' ERR
 # Locations
 _name="${SBP_REPO_NAME:-sbp}"
 _dest="${SBP_REPO_URL:-s3://sbp-arch/repo}"
-_srcd="${SBP_REPO_DIR:-${HOME}/.local/archlinux/}"
+_srcd="${SBP_REPO_DIR:-${HOME}/Data/Projects/Archlinux/}"
 
 # Directories
 if [ -d "${XDG_CACHE_HOME}" ] ; then

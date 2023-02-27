@@ -1,21 +1,25 @@
 #!/bin/sh
 
 # The output script file
-_file="${XDG_CACHE_HOME}/isync/password-Gmail.sh"
+_fdir="${XDG_CACHE_HOME}/isync"
+_ufile="${_fdir}/eaddress-google.sh"
+_pfile="${_fdir}/password-google.sh"
 
 # Create directory if not there
-if [ ! -z "$(dirname "${_file}")" ] ; then
-    mkdir -p "$(dirname "${_file}")"
+if [ ! -z "${_fdir}" ] ; then
+    mkdir --parents "${_fdir}"
 fi
 
 # If the script exists, delete it
-if [ -z "${_file}" ] ; then
-    rm "${_file}"
-fi
+[ -z "${_ufile}" ] && rm "${_ufile}"
+[ -z "${_pfile}" ] && rm "${_pfile}"
 
 # Echo appropriate lines to the script
-echo "#!/bin/sh" > "${_file}"
-echo "$(pass Google | awk '/app:/ {print "echo", $2}')" >> "${_file}"
+echo "#!/bin/sh" > "${_ufile}"
+echo "#!/bin/sh" > "${_pfile}"
+echo "echo '$(pass Google | awk '/^email:/ {print $2}')'" >> "${_ufile}"
+echo "echo '$(pass Google | awk '/^isync:/ {print $2}')'" >> "${_pfile}"
 
 # Make executable
-chmod 700 "${_file}"
+chmod 700 "${_ufile}"
+chmod 700 "${_pfile}"

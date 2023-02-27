@@ -42,40 +42,44 @@ video/x-theora+ogg=smplayer.desktop;
 audio/x-vorbis+ogg=smplayer.desktop;
 
 [Default Applications]
-application/pdf=org.pwmt.zathura-pdf-mupdf.desktop
+application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
 image/vnd.djvu+multipage=zathura-djvu.desktop;
-text/plain=nvim.desktop
+text/plain=nvim.desktop;
 text/x-tex=nvim.desktop;
-image/jpeg=ristretto.desktop
-image/jpg=ristretto.desktop
-image/gif=ristretto.desktop
-image/png=ristretto.desktop
-image/tiff=darktable.desktop
-text/html=firefox.desktop
+image/jpeg=vimiv.desktop;
+image/jpg=vimiv.desktop;
+image/gif=vimiv.desktop;
+image/png=vimiv.desktop;darktable.desktop;feh.desktop;gimp.desktop;imv-folder.desktop;imv.desktop;libresprite.desktop;okularApplication_kimgio.desktop;org.kde.mobile.okular_kimgio.desktop;org.qutebrowser.qutebrowser.desktop;org.xfce.ristretto.desktop;
+image/tiff=darktable.desktop;
+text/html=firefox.desktop;
 video/x-msvideo=smplayer.desktop;
 video/mp4=smplayer.desktop;
 video/x-matroska=smplayer.desktop;
 application/msword=libreoffice-writer.desktop;
-inode/directory=vifm.desktop
-x-scheme-handler/default=org.qutebrowser.qutebrowser.desktop
-x-scheme-handler/http=org.qutebrowser.qutebrowser.desktop
-x-scheme-handler/https=org.qutebrowser.qutebrowser.desktop
-x-scheme-handler/ftp=org.qutebrowser.qutebrowser.desktop
-x-scheme-handler/chrome=org.qutebrowser.qutebrowser.desktop
-application/x-extension-htm=firefox.desktop
-application/x-extension-html=firefox.desktop
-application/x-extension-shtml=firefox.desktop
-application/xhtml+xml=firefox.desktop
-application/x-extension-xhtml=firefox.desktop
-application/x-extension-xht=firefox.desktop
+inode/directory=vifm.desktop;
+x-scheme-handler/default=firefox.desktop;
+x-scheme-handler/http=firefox.desktop;
+x-scheme-handler/https=firefox.desktop;
+x-scheme-handler/ftp=firefox.desktop;
+x-scheme-handler/chrome=firefox.desktop;
+application/x-extension-htm=firefox.desktop;
+application/x-extension-html=firefox.desktop;
+application/x-extension-shtml=firefox.desktop;
+application/xhtml+xml=firefox.desktop;
+application/x-extension-xhtml=firefox.desktop;
+application/x-extension-xht=firefox.desktop;
 x-scheme-handler/rdp=org.remmina.Remmina.desktop
 x-scheme-handler/spice=org.remmina.Remmina.desktop
 x-scheme-handler/vnc=org.remmina.Remmina.desktop
 x-scheme-handler/remmina=org.remmina.Remmina.desktop
 application/x-remmina=org.remmina.Remmina.desktop
-x-scheme-handler/mailto=xfce4-mail-reader.desktop
-application/octet-stream=nvim.desktop
+x-scheme-handler/mailto=xfce4-mail-reader.desktop;
+application/octet-stream=nvim.desktop;
 
 [Removed Associations]
 application/pdf=libreoffice-writer.desktop;wine-extension-pdf.desktop;gimp.desktop;
 application/xml=org.qutebrowser.qutebrowser.desktop;
+
+[Added Applications]
+
+[Removed Applications]

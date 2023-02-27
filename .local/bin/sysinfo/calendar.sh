@@ -14,7 +14,7 @@ trap 'kill 0' EXIT
 # Calendar module (depends on khal)
 #  * Can specify location using SYSINFO_CAL_LOC
 if [ -z "${SYSINFO_CAL_LOC}" ] ; then
-    SYSINFO_CAL_LOC="${HOME}/Documents/Calendar"
+    SYSINFO_CAL_LOC="${HOME}/Data/Calendar"
 fi
 if [ -z "${SYSINFO_CAL_MAXLEN}" ] ; then
     SYSINFO_CAL_MAXLEN=30

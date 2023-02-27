@@ -1,6 +1,0 @@
-// Only include matlab folder
-!/Stignore
-!/Stignore/*
-// Only include MATLAB; don't sync anything else
-!/MATLAB
-/*

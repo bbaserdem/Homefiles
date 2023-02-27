@@ -22,6 +22,10 @@ for _app in CardDAV CalDAV ; do
     ${_app}+url)   echo '$(pass "${_app}"|grep 'url:'     |awk '{print $2}')' ;;"\
         >> "${_file}"
 done
+echo "\
+    Google+client)  echo '$(pass 'Google'|grep 'client-id:'|awk '{print $2}')' ;;
+    Google+secret)  echo '$(pass 'Google'|grep 'client-secret:'|awk '{print $2}')' ;;"\
+    >> "${_file}"
 echo 'esac' >> "${_file}"
 
 # Make executable

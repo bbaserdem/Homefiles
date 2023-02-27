@@ -143,24 +143,23 @@ loader.texlab.setup({
     capabilities = common_capabilities,
 })
 -- Lua
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-loader.sumneko_lua.setup {
+--local runtime_path = vim.split(package.path, ';')
+--table.insert(runtime_path, "lua/?.lua")
+--table.insert(runtime_path, "lua/?/init.lua")
+loader.lua_ls.setup {
     on_attach = common_on_attach,
     capabilities = common_capabilities,
     settings = {
         Lua = {
             runtime = {
                 version = 'LuaJIT',
-                path = runtime_path,
+                --path = runtime_path,
             },
             diagnostics = {
                 globals = { 'vim' },
             },
             workspace = {
                 library = vim.api.nvim_get_runtime_file("", true),
-                checkThirdParty = false,
             },
             telemetry = {
                 enable = false,

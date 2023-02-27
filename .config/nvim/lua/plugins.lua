@@ -414,6 +414,7 @@ plugLoader('nvim-tree', {
     filters = {
         dotfiles = false,
         custom = { -- Ignore aux latex files
+            [[\\\\.git$]],
             [[\.aux$]],
             [[\.bbl$]],
             [[\.bcf$]],
@@ -427,7 +428,9 @@ plugLoader('nvim-tree', {
             [[\.synctex\.gz$]],
             [[\.toc$]],
             },
-        exclude = {},
+        exclude = {
+            [[\\.eps$]],
+        },
     },
 })
 
@@ -611,7 +614,11 @@ g.vimtex_mappings_enabled = 0
 g.vimtex_compiler_method = 'latexmk'
 g.vimtex_view_method = 'zathura'
 g.vimtex_compiler_progname = 'nvr'
-g.vimtex_quickfix_ignore_filters = { 'Underfull', 'Overfull' }
+g.vimtex_quickfix_ignore_filters = {
+    'Underfull',
+    'Overfull',
+    'Float too large'
+}
 --g.vimtex_view_zathura_options = 
 --[[
 g.vimtex_compiler_tectonic = {

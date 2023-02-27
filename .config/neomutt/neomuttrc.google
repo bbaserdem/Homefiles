@@ -1,0 +1,16 @@
+#-----------------#
+#-----ACCOUNT-----#
+#-----------------#
+set ssl_force_tls = yes
+
+# Folder definitions
+set folder = ~/Data/Mail/
+set spoolfile = +Google/Inbox
+set postponed = +Google/Drafts
+set record = +Google/Sent
+set trash = +Google/Trash
+mailboxes +Google/Inbox +Google/Important +Google/Starred +Google/Drafts +Google/Trash +Google/Sent
+# Mailing definitions
+set from = "Batuhan Başerdem <baserdem.batuhan@gmail.com>"
+set sendmail = "/usr/bin/msmtp --file $XDG_CONFIG_HOME/neomutt/msmtprc --account Google"
+set mbox_type = Maildir

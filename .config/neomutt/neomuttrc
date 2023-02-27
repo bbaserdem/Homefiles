@@ -34,7 +34,7 @@ unhdr_order *                           # some distros order things by default
 hdr_order from: to: cc: date: subject:  # and in this order
 set sendmail_wait = 0                   # Mail send delay
 unset record                            # A copy will be generated on mail server
-set signature = ~/Mail/Signature
+set signature = $XDG_CONFIG_HOME/neomutt/signature
 set forward_format = "Fwd: %s"
 set text_flowed
 unset mime_forward
@@ -45,7 +45,6 @@ bind editor ^T    complete
 #-----Pager (mail view)-----#
 set mailcap_path = $XDG_CONFIG_HOME/neomutt/mailcap
 auto_view text/html             # View html
-# Viewing order
 alternative_order text/plain text/enriched text/html
 set text_flowed = yes           # Allow scrolling mail
 set pager = "builtin"           # Use mutt to view mails
@@ -125,7 +124,7 @@ bind compose p postpone-message
 bind index p recall-message
 macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
-macro index,pager R "!mbsync --config ~/.config/isync/config --all" "Update IMAP"
+macro index,pager R "!isync-mailboxes-update.sh" "Update IMAP"
 
 # Search function
 set nm_default_url = "notmuch://$HOME/Data/Mail"
@@ -135,4 +134,4 @@ bind index \\ vfolder-from-query
 #------------------#
 #-----ACCOUNTS-----#
 #------------------#
-source $XDG_CONFIG_HOME/neomutt/neomuttrc.gmail
+source $XDG_CONFIG_HOME/neomutt/neomuttrc.google

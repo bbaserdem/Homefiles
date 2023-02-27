@@ -25,6 +25,13 @@ wttr_weather () {
         curl 'https://wttr.in/'"$(echo $1)"
     fi
 }
+diff_colorful () {
+    diff "${1}" "${2}" --color=always --side-by-side | less -R
+}
+xdg-which-default () {
+    type="$(xdg-mime query filetype "${1}")"
+    xdg-mime query default "${type}"
+}
 
 # Aliases
 alias py='bpython'

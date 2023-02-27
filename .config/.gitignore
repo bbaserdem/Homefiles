@@ -177,11 +177,6 @@
 !/listenbrainz-mpd
 !/listenbrainz-mpd/config.toml
 
-# MATLAB: Only get config, and symlinks
-!/matlab
-!/matlab/R2*
-!/matlab/MLintDefaultSettings.txt
-
 # MPD: Only get config
 !/mpd
 !/mpd/mpd.conf

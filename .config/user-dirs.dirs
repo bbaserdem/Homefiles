@@ -8,12 +8,10 @@
 # Data folder
 XDG_DESKTOP_DIR="$HOME/Data/Desktop"
 XDG_DOWNLOAD_DIR="$HOME/Data/Downloads"
-
-# Documents
-XDG_DOCUMENTS_DIR="$HOME/Data/Documents"
 XDG_TEMPLATES_DIR="$HOME/Data/Templates"
 
 # Media
+XDG_DOCUMENTS_DIR="$HOME/Media/Documents"
 XDG_MUSIC_DIR="$HOME/Media/Music"
 XDG_PICTURES_DIR="$HOME/Media/Pictures"
 XDG_VIDEOS_DIR="$HOME/Media/Videos"

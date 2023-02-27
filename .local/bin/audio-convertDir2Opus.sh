@@ -11,4 +11,5 @@ fi
 # Run scripts on all files under these directories
 find "${input_dir}" -type f -name '*.mp3' -exec audio-convert_mp3-2-opus.sh {} \;
 find "${input_dir}" -type f -name '*.m4a' -exec audio-convert_m4a-2-opus.sh {} \;
+find "${input_dir}" -type f -name '*.ogg' -exec audio-convert_ogg-2-opus.sh {} \;
 find "${input_dir}" -type f -name '*.flac' -exec audio-convert_flac-2-opus.sh {} \;

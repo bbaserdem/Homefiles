@@ -8,52 +8,58 @@ SyncState *
 #################
 ##### Gmail #####
 #################
-IMAPAccount Gmail
+IMAPAccount Google
 Host imap.gmail.com
-User baserdem.batuhan@gmail.com
-PassCmd "$HOME/.cache/isync/password-Gmail.sh"
+UserCmd "$HOME/.cache/isync/eaddress-google.sh"
+PassCmd "$HOME/.cache/isync/password-google.sh"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 # Remote storage
-IMAPStore Gmail-remote
-Account Gmail
+IMAPStore Google-remote
+Account Google
 
 # Local storage
-MaildirStore Gmail-local
+MaildirStore Google-local
 Subfolders Verbatim
-Path ~/Mail/Gmail/
-Inbox ~/Mail/Gmail/Inbox/
+Path ~/Data/Mail/Google/
+Inbox ~/Data/Mail/Google/Inbox
 
-Channel Gmail-Inbox
-Master :Gmail-remote:
-Slave :Gmail-local:
+Channel Google-Inbox
+Far :Google-remote:
+Near :Google-local:
 Patterns "INBOX"
+Create Near
 
-Channel Gmail-sent
-Master :Gmail-remote:"[Gmail]/Sent Mail"
-Slave :Gmail-local:Sent
+Channel Google-sent
+Far :Google-remote:"[Gmail]/Sent Mail"
+Near :Google-local:Sent
+Create Near
 
-Channel Gmail-trash
-Master :Gmail-remote:"[Gmail]/Trash"
-Slave :Gmail-local:Trash
+Channel Google-trash
+Far :Google-remote:"[Gmail]/Trash"
+Near :Google-local:Trash
+Create Near
 
-Channel Gmail-drafts
-Master :Gmail-remote:"[Gmail]/Drafts"
-Slave :Gmail-local:Drafts
+Channel Google-drafts
+Far :Google-remote:"[Gmail]/Drafts"
+Near :Google-local:Drafts
+Create Near
 
-Channel Gmail-important
-Master :Gmail-remote:"[Gmail]/Important"
-Slave :Gmail-local:Important
+Channel Google-important
+Far :Google-remote:"[Gmail]/Important"
+Near :Google-local:Important
+Create Near
 
-Channel Gmail-starred
-Master :Gmail-remote:"[Gmail]/Starred"
-Slave :Gmail-local:Starred
+Channel Google-starred
+Far :Google-remote:"[Gmail]/Starred"
+Near :Google-local:Starred
+Create Near
 
-Group Gmail
-Channel Gmail-inbox
-Channel Gmail-sent
-Channel Gmail-trash
-Channel Gmail-drafts
-Channel Gmail-important
-Channel Gmail-starred
+Group Google
+Channel Google-inbox
+Channel Google-sent
+Channel Google-trash
+Channel Google-drafts
+Channel Google-important
+Channel Google-starred

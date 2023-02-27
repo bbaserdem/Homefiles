@@ -4,7 +4,7 @@
 input_file="${1}"
 downl_dir="$(xdg-user-dir DOWNLOAD)"
 [ -z "${downl_dir}" ] && downl_dir="${HOME}/Downloads"
-backup_dir="${downl_dir}/FlacToOpus-backup"
+backup_dir="${downl_dir}/M4uToOpus-backup"
 mkdir --parents "${backup_dir}"
 
 # Guard

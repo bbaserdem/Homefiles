@@ -12,6 +12,10 @@
 !/.local
 !/.local/.gitignore
 
+# Ignore .ssh if folder; grab if symlink
+!/.ssh
+/.ssh/
+
 # Grab profile pictures
 !/.face
 !/.face.icon
