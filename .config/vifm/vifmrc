@@ -113,10 +113,10 @@ fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
 " Man page
 fileviewer *.[1-8] man ./%c | col -b
 " Images
-fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-        \ kitty +kitten icat --transfer-mode=stream --place=%pwx%ph@%pxx%py %c %N
-        \ %pc
-        \ kitty +kitten icat --clear %pd
+" fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
+"         \ kitty +kitten icat --transfer-mode=file --place=%pwx%ph@%pxx%py %c >/dev/tty </dev/tty %N
+"         \ %pc
+"         \ kitty +kitten icat --clear --silent >/dev/tty </dev/tty %N
 " Archive files
 fileviewer *.tgz,*.tar,*.tar.gz,*.tar.bz,*.tbz,*.bz,*tar.bz2,*.tbz2,*.bz2,*.tar.Z,*.tZ,*.Z,*.tar.lzo,*.tzo,*.lzo,*.tar.lz,*.tlz,*.lz,*.tar.xz,*.txz,*.xz,*.tar.7z,*.t7z,*.7z,*.zip,*.jar,*.war,*.rar,*.lha,*.lzh,*.alz,*.ace,*.a,*.arj,*.arc,*.rpm,*.deb,*.cab,*.gz,*.bz,*.lzma,*.rz,*.lrz,*.cpio
        \ {List using patool}
