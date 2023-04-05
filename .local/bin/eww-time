@@ -1,0 +1,64 @@
+#!/bin/dash
+# vim:ft=sh
+
+#######################
+#      _         _    #
+#  ___| |___ ___| |_  #
+# |  _| | . |  _| '_| #
+# |___|_|___|___|_,_| #
+#######################
+# Clock module;
+#  * Takes no arguments
+
+# Print time day info
+datetime_info () {
+    # Get clock info besides seconds
+    mins_num="$(date '+%M')"
+    hour_num="$(date '+%H')"
+    case "${hour_num}" in
+        00|12)  clock_icon='' ;;
+        01|13)  clock_icon='' ;;
+        02|14)  clock_icon='' ;;
+        03|15)  clock_icon='' ;;
+        04|16)  clock_icon='' ;;
+        05|17)  clock_icon='' ;;
+        06|18)  clock_icon='' ;;
+        07|19)  clock_icon='' ;;
+        08|20)  clock_icon='' ;;
+        09|21)  clock_icon='' ;;
+        10|22)  clock_icon='' ;;
+        11|23)  clock_icon='' ;;
+        *)      clock_icon='' ;;
+    esac
+    day_num="$(date '+%d')"
+    day_name="$(date '+%a')"
+    day_name_full="$(date '+%A')"
+    month_num="$(date '+%m')"
+    month_name="$(date '+%b')"
+    month_name_full="$(date '+%B')"
+    year_num="$(date '+%y')"
+    calendar_icon=''
+    day_week="$(date '+%u')"
+    week_num="$(date '+%V')"
+    week_icon=''
+    txt="{\"clock\":{\"icon\":\"${clock_icon}\","
+    txt="${txt}\"minute\":\"${mins_num}\","
+    txt="${txt}\"hour\":\"${hour_num}\"},"
+    txt="${txt}\"calendar\":{\"icon\":\"${calendar_icon}\","
+    txt="${txt}\"day\":\"${day_num}\","
+    txt="${txt}\"month\":\"${month_num}\","
+    txt="${txt}\"year\":\"${year_num}\","
+    txt="${txt}\"shortname\":{\"day\":\"${day_name}\","
+    txt="${txt}\"month\":\"${month_name}\"},"
+    txt="${txt}\"name\":{\"day\":\"${day_name_full}\","
+    txt="${txt}\"month\":\"${month_name_full}\"}},"
+    txt="${txt}\"week\":{\"icon\":\"${week_icon}\","
+    txt="${txt}\"week\":\"${week_num}\","
+    txt="${txt}\"day\":\"${day_week}\"}}"
+    echo "${txt}"
+}
+while : ; do
+    datetime_info
+    # Wait until one second in to the next minute
+    sleep "$(( 60000 - $(date '+%S%3N') + 10))"e-3s
+done

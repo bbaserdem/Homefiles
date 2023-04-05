@@ -48,31 +48,52 @@
 !/.tmux.conf
 
 # Grab some directory structure so that these are imported
+
+#----------#
+#---DATA---#
+#----------#
 !/Data
 !/Data/Readme.md
+
+# Symlinks
+!/Data/Cache
 !/Data/Configs
 !/Data/Local
+
+# System folders
+!/Data/Calendar
+!/Data/Calendar/Readme.md
+!/Data/Contacts
+!/Data/Contacts/Readme.md
 !/Data/Desktop
 !/Data/Desktop/Readme.md
 !/Data/Downloads
 !/Data/Downloads/Readme.md
+!/Data/MATLAB
+!/Data/MATLAB/Readme.md
+!/Data/MATLAB/*.m
+!/Data/Mail
+!/Data/Mail/Readme.md
+!/Data/Projects
+!/Data/Projects/Readme.md
+!/Data/Templates
+!/Data/Templates/Readme.md
 !/Data/Work
 !/Data/Work/Readme.md
 !/Data/Work/Stignore
 !/Data/Work/Stignore/*
-!/Data/Projects
-!/Data/Projects/Readme.md
-!/Data/Projects/Stignore
-!/Data/Projects/Stignore/*
+
+#-----------#
+#---MEDIA---#
+#-----------#
 !/Media
-!/Media/Readme.md
 !/Media/Stignore
 !/Media/Stignore/*
+
+#------------#
+#---SHARES---#
+#------------#
 !/Shares
 !/Shares/External Drives
 !/Shares/Public
 !/Shares/Public/Readme.md
-!/Shares/Phone
-!/Shares/Phone/Readme.md
-!/Shares/Phone/Stignore
-!/Shares/Phone/Stignore/*

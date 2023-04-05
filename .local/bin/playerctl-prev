@@ -1,0 +1,14 @@
+#!/bin/dash
+
+# Get current time from playerctl, in microseconds, and the length
+_time="$(playerctl metadata --format "{{ position }}")"
+_durt="$(playerctl metadata --format "{{ mpris:length }}")"
+
+# Only work if we have a duration; AKA it's not a stream
+if [ -n "${_durt}" ] ; then
+    if [ "${_time}" -ge 3000000 ] ; then
+        playerctl seek 0 >/dev/null 2>&1
+    else
+        playerctl previous >/dev/null 2>&1
+    fi
+fi

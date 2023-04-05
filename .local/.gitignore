@@ -12,27 +12,19 @@
 !/.gitmodules
 !/Readme.md
 
-# Don' get subrepos
+# Don' get password repo
 /pass
-/archlinux
-/gentoo
 
-# Grab scripts from bin
+# Grab all shell scripts and select executables from bin
 !/bin
 !/bin/bspwmctl
+!/bin/playerctl-*
 !/bin/*.sh
 !/bin/*.py
 !/bin/arch-repo*
 !/bin/sysinfo
 !/bin/sysinfo/*.sh
-!/bin/eww
-!/bin/eww/*.sh
-
-# Grab my custom beets plugins
-!/beets
-!/beets/beetsplug
-!/beets/beetsplug/__init__.py
-!/beets/beetsplug/*.py
+!/bin/eww-*
 
 # Grab the gnupg symlinks, but nothing else from this directory
 !/gnupg
