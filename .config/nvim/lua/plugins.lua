@@ -346,30 +346,55 @@ end
 M.loader = plugLoader
 
 -- Barbar: Better tab bar
-vim.g.bufferline = {
+plugLoader('barbar', {
     animation = true,               -- Enable/disable animations
     auto_hide = false,              -- Enable/disable auto-hide
-    tabpages = true,                -- Enable/disable current/total pages (top R)
-    closable = true,                -- Enable/disable close button
-    clickable = true,               -- Enables/disable clickable tabs (mid deletes)
+    tabpages = true,                -- Enable/disable current/total pages 
+    -- Top
+    clickable = true, -- Enables/disable clickable tabs (mid deletes)
     exclude_ft = {'javascript'},    -- Excludes buffers from the tabline
     exclude_name = {'package.json'},
-    icons = 'both',                 -- Enable/disable icons
-    icon_custom_colors = false,
-    -- Configure icons on the bufferline.
-    icon_separator_active = '▎',
-    icon_separator_inactive = '▎',
-    icon_close_tab = '',
-    icon_close_tab_modified = '●',
-    icon_pinned = '車',
-    insert_at_end = false,          -- Default is to insert after current buffer.
-    insert_at_start = false,
-    maximum_padding = 1,            -- Sets the maximum padding
-    maximum_length = 30,            -- Sets the maximum buffer name length.
+    icons = {
+        buffer_index = false,
+        buffer_number = false,
+        button = '',
+        diagnostics = {
+            [vim.diagnostic.severity.ERROR] = {enabled = true , icon = 'ﬀ'},
+            [vim.diagnostic.severity.WARN] = { enabled = false},
+            [vim.diagnostic.severity.INFO] = { enabled = false},
+            [vim.diagnostic.severity.HINT] = { enabled = true },
+        },
+        filetype = {
+            custom_colors = false,
+            enabled = true,
+        },
+        separator = {
+            left = '▎',
+            right = '',
+        },
+        modified = {button = '●'},
+        pinned = {
+            button = '車',
+            filename = true,
+            separator = {right = ''},
+        },
+        alternate = {filetype = {enabled = false}},
+        current = {buffer_index = true},
+        inactive = {button = ''},
+        visible = {modified = {buffer_number = false}},
+    },
+    maximum_padding = 1,
+    maximum_length = 30,
     semantic_letters = true,
+    sidebar_filetypes = {
+        NvimTree = true,
+        undotree = {text = 'undotree'},
+        ['neo-tree'] = {event = 'BufWipeout'},
+        Outline = {event = 'BufWinLeave', text = 'symbols-outline'},
+    },
     letters = 'aoeuidhtnsAOEUIDHTNSqjkxbmwvQJKXBMWVpyfgPYFGcrlCRL',
     no_name_title = nil,
-}
+})
 
 -- Markdown preview
 vim.g.nvim_markdown_preview_theme = 'solarized-dark'

@@ -15,18 +15,25 @@ class MyPlugin(BeetsPlugin):
         self.template_fields['tracknumber'] = _full_track
         self.template_fields['trackdate'] = _date
         self.template_fields['division'] = _division
-        self.template_fields['storage_track'] = _archive
+        self.template_fields['storage_track'] = _archive_field
         self.album_template_fields['date'] = _date
         self.album_template_fields['initial'] = _initial
         self.album_template_fields['adiv'] = _division
-        self.album_template_fields['storage'] = _archive
+        self.album_template_fields['storage'] = _archive_field
+        # Add field named series
         _series = mediafile.MediaField(
             mediafile.MP3DescStorageStyle('Series'),
             mediafile.StorageStyle('SERIES'),
+            out_type=int
+        )
+        # Add field named archive
+        self.add_media_field('series', _series)
+        _archive = mediafile.MediaField(
+            mediafile.MP3DescStorageStyle('Archive'),
+            mediafile.StorageStyle('ARCHIVE'),
             out_type=str
         )
-        self.add_media_field('series', _series)
-
+        self.add_media_field('archive', _archive)
 
 def _full_track(item):
     """Track name.
@@ -116,9 +123,9 @@ def _division(item):
         return ''
 
 
-def _archive(item):
+def _archive_field(item):
     """Spit separatory directory if needed."""
     if hasattr(item, 'archive'):
-        if item.archive:
+        if item.archive == '1':
             return 'Archive'
     return ''
