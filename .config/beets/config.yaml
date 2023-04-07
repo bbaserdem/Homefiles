@@ -1,0 +1,132 @@
+# Beets music library info
+# Global options
+directory: ~/Media/Music
+library: ~/Media/Music/Library.db
+ignore_hidden: no
+asciify_paths: no
+path_sep_replace: '⌿' # Path separators should create new paths in functions
+replace:
+  '^-': '_'           # Replace leading dash
+  '^/': ''            # Remove leading directory creator
+  '^\.': ''           # Remove leading dots
+  '^\s+': ''          # remove trailing white-space
+  '\s+$': ''          # remove ending white-space
+  '[\x00-\x1f]': ''   # Remove control characters
+  '<':  '＜'          # Windows/Android restricted characters
+  '>':  '＞'
+  ':':  '∶'
+  '"':  '″'
+  '\?': '⁇'
+  '\*': '✱'
+  '\|': '￨'
+  '\\': '⍀'
+  '\.\.\.': '…'       # Other replacements
+  '&':  '＆'
+threaded: yes
+sort_item: albumartist+ artist+ album+ disc+ track+
+sort_case_insensitive: no
+artist_credit: yes
+per_disc_numbering: yes
+# UI options
+ui:
+  color: yes
+# Importer options
+import:
+  write: yes
+  move: yes
+  resume: ask
+  from_scratch: no
+  quiet: no
+  quiet_fallback: asis
+  log: ~/.cache/beets/log
+  default_action: skip
+  languages: en tr jp
+  detail: no
+  duplicate_action: ask
+  bell: yes
+# Musicbrainz database options
+musicbrainz:
+  searchlimit: 10
+  extra_tags: [year, catalognum, country, media, label]
+  genre: yes
+  user: silverbluep
+  pass:
+# Autotagger matching
+match:
+  strong_rec_thresh: 0.04
+# Plugins
+pluginpath:
+- ~/.config/beets/beetsplug
+plugins:
+- convert
+- duplicates
+- info
+- missing
+- edit
+- fetchart
+- lastgenre
+- lyrics
+- mbsync
+- mpdstats
+- parentwork
+- replaygain
+- zero
+- mpdupdate
+- playlist
+- smartplaylist
+- the
+- sbp
+- extrafiles
+#- mbcollection
+# Plugin options
+convert:
+  auto: no
+  copy_album_art: no
+  embed: no
+  delete_originals: yes
+  dest: ~/Data/Downloads/ConvertBackup
+  format: 2opus
+  formats:
+    2opus:
+      extension: opus
+      command: audio-convert2opus.sh $source $dest
+duplicates:
+  tag: duplicate=true
+fetchart:
+  auto: yes
+  sources: filesystem coverart albumart itunes amazon wikipedia
+  high_resolution: yes
+  store_source: yes
+lastgenre:
+  auto: no
+  canonical: yes
+  count: 3
+  min_weight: 20
+lyrics:
+  auto: no
+  sources: genius musixmatch tekstowo
+mpd:
+  rating: yes
+replaygain:
+  auto: no
+  backend: ffmpeg
+  overwrite: no
+zero:
+  auto: yes
+  comments: [EAC, LAME, from.+collection, 'ripped by']
+  fields: comments images
+playlist:
+  auto: yes
+  playlist_dir: ~/Media/Music/Playlists
+  relative_to: library
+smartplaylist:
+  relative_to: ~/Media/Music
+  playlist_dir: ~/Media/Music/Playlists
+extrafiles:
+  patterns:
+    booklet: '*.pdf'
+# Path specifications
+paths:
+  default: '$storage/[${initial}]/%the{${albumartist}}/%if{${division},${division}/}%if{$date,[${date}] }${album}/%if{${tracknumber},${tracknumber}. }${title} - ${artist}'
+  comp: '$storage/[${initial}]/%if{${division},${division}/}%if{$date,[${date}] }${album}/%if{${tracknumber},${tracknumber}. }${title} - ${artist}'
+  singleton: '$storage_track/[${initial}]/%the{${albumartist}}/%if{$date,[${date}] }${title} - ${artist}'

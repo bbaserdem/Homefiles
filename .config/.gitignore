@@ -73,7 +73,7 @@
 
 # BEETS: Accept all
 !/beets
-!/beets/config.yml
+!/beets/config.yaml
 !/beets/library.db
 !/beets/state.pickle
 !/beets/beetsplug
