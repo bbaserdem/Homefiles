@@ -36,7 +36,7 @@ print_info () {
     # Get data from /proc/loadavg
     data="$(cat /proc/loadavg)"
     # Get average load for last minute
-    txt="$(echo "${data}" | awk '{printf("%.1f",$1)}')"
+    txt="$(echo "${data}" | awk '{printf("%.1f",$1)}')"
     # Print string
     formatted_output
 }

@@ -35,7 +35,7 @@ print_info () {
     # Get info on battery state
     if [ "${instance}" = 'cyberpower' ] ; then
         if [ ! -x '/usr/bin/upsc' ] ; then
-            pre='ﳧ '
+            pre='󱔝 '
             txt=''
             suf=''
         elif upsc cyberpower >/dev/null 2>&1 ; then
@@ -69,29 +69,26 @@ print_info () {
         perc="$(echo "${bat}" | sed 's|.*, \([0-9]\+\)%.*|\1|')"
         # Change the front icon to capacity; with sign if it's charging
         if [ "${stat}" = 'Charging' ] ; then
-            if   [ "${perc}" -gt 99 ] ; then col="${base0B}" ; pre=" " ; class='good'
-            elif [ "${perc}" -ge 90 ] ; then col="${base0B}" ; pre=" " ; class='good'
-            elif [ "${perc}" -ge 80 ] ; then col="${base0B}" ; pre=" " ; class='good'
-            elif [ "${perc}" -ge 60 ] ; then col="${base0A}" ; pre=" " ; class='ok'
-            elif [ "${perc}" -ge 40 ] ; then col="${base0A}" ; pre=" " ; class='ok'
-            elif [ "${perc}" -ge 30 ] ; then col="${base09}" ; pre=" " ; class='warn'
-            elif [ "${perc}" -ge 20 ] ; then col="${base08}" ; pre=" " ; class='low'
-            else                             col="${base08}" ; pre=" " ; class='low'
+            if   [ "${perc}" -gt 99 ] ; then col="${base0B}" ; pre="󰂅 " ; class='good'
+            elif [ "${perc}" -ge 90 ] ; then col="${base0B}" ; pre="󰂋 " ; class='good'
+            elif [ "${perc}" -ge 80 ] ; then col="${base0B}" ; pre="󰂊 " ; class='good'
+            elif [ "${perc}" -ge 70 ] ; then col="${base0B}" ; pre="󰢞 " ; class='good'
+            elif [ "${perc}" -ge 60 ] ; then col="${base0A}" ; pre="󰂉 " ; class='ok'
+            elif [ "${perc}" -ge 50 ] ; then col="${base0A}" ; pre="󰢝 " ; class='ok'
+            elif [ "${perc}" -ge 40 ] ; then col="${base0A}" ; pre="󰂈 " ; class='ok'
+            elif [ "${perc}" -ge 30 ] ; then col="${base09}" ; pre="󰂇 " ; class='warn'
+            elif [ "${perc}" -ge 20 ] ; then col="${base08}" ; pre="󰂆 " ; class='low'
+            else                             col="${base08}" ; pre="󰢜 " ; class='low'
             fi
         else
-            if   [ "${perc}" -ge 95 ] ; then col="${base0B}" ; pre=" " ; class='good'
-            elif [ "${perc}" -ge 90 ] ; then col="${base0B}" ; pre=" " ; class='good'
-            elif [ "${perc}" -ge 80 ] ; then col="${base0B}" ; pre=" " ; class='good'
-            elif [ "${perc}" -ge 70 ] ; then col="${base0A}" ; pre=" " ; class='ok'
-            elif [ "${perc}" -ge 60 ] ; then col="${base0A}" ; pre=" " ; class='ok'
-            elif [ "${perc}" -ge 50 ] ; then col="${base09}" ; pre=" " ; class='warn'
-            elif [ "${perc}" -ge 40 ] ; then col="${base09}" ; pre=" " ; class='warn'
-            elif [ "${perc}" -ge 30 ] ; then col="${base08}" ; pre=" " ; class='low'
-            elif [ "${perc}" -ge 20 ] ; then col="${base08}" ; pre=" " ; class='low'
-            else                             col="${base08}" ; pre=" " ; class='low'
+            if   [ "${perc}" -ge 80 ] ; then col="${base0B}" ; pre=" " ; class='good'
+            elif [ "${perc}" -ge 60 ] ; then col="${base0A}" ; pre=" " ; class='ok'
+            elif [ "${perc}" -ge 40 ] ; then col="${base09}" ; pre=" " ; class='warn'
+            elif [ "${perc}" -ge 20 ] ; then col="${base08}" ; pre=" " ; class='low'
+            else                             col="${base08}" ; pre=" " ; class='low'
             fi
         fi
-        txt="${perc}"
+        txt="${perc}"
         # Check if time info is available, and add it to text if it is
         if echo "${bat}" | grep -q -e 'until charged' -e 'remaining' ; then
             txt="${perc}, $(echo "${bat}" | awk '{print $5}' \
@@ -99,9 +96,9 @@ print_info () {
         fi
         # Make the suffix into connected/not connected icon
         if [ "$(echo "${ada}" | awk '{print $3}')" = 'on-line' ] ; then
-            suf=" ﮣ"
+            suf=" "
         else
-            suf=" ﮤ"
+            suf=" 󰚦"
         fi
     fi
     # Print string

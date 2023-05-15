@@ -86,19 +86,28 @@ print_info () {
     if [ "${instance}" = 'sink' ] ; then 
         # Determine icon for the sink, based on device.icon_name
         case "${_name}" in
-            *"HDMI"*)                                                 pre="﴿ "                   ;;
+            *"HDMI"*)                                                 pre="󰡁 "                   ;;
             *"DualShock"*)                                            pre=" "                   ;;
             *)
                 case "${_icon}" in
-                    *usb*)                                            pre="禍 "                 ;;
-                    *hdmi*)                                           pre="﴿ "                  ;;
-                    *headset*)            [ "${_mute}" = 'false' ] && pre=" "  || pre=" "     ;;
-                    *a2dp*)               [ "${_mute}" = 'false' ] && pre="﫽 " || pre="﫾 "    ;;
-                    *hifi*|*stereo*)                                  pre="﫛 "                 ;;
-                    *headphone*|*lineout*)[ "${_mute}" = 'false' ] && pre=" "  || pre="ﳌ "     ;;
-                    *speaker*)            [ "${_mute}" = 'false' ] && pre="蓼 " || pre="遼 "    ;;
-                    *network*)                                        pre="爵 "                 ;;
-                    *)                    [ "${_mute}" = 'false' ] && pre="墳 " || pre="ﱝ "     ;;
+                    *usb*)
+                        pre="󰕓 "
+                        ;;
+                    *hdmi*)
+                        pre="󰡁 "
+                        ;;
+                    *headset*|*a2dp*|*headphone*|*lineout*)
+                        [ "${_mute}" = 'false' ]    && pre="󰋎 " || pre="󰋐 "
+                        ;;
+                    *speaker*|*hifi*|*stereo*)
+                        [ "${_mute}" = 'false' ]    && pre="󰓃 " || pre="󰓄 "
+                        ;;
+                    *network*)
+                        [ "${_mute}" = 'false' ]    && pre="󰛳 " || pre="󰓃 "
+                        ;;
+                    *)
+                        [ "${_mute}" = 'false' ]    && pre="󰗜 " || pre="󰗜 "
+                        ;;
                 esac
                 ;;
         esac
@@ -114,13 +123,19 @@ print_info () {
     elif [ "${instance}" = 'source' ] ; then
         # Determine icon for the sink
         case "${_icon}" in
-            audio-card-pci) [ "${_mute}" = 'no' ] && pre=" "  || pre=" " ;;
-            camera-web-usb)                          pre="犯 "             ;;
-            *)              [ "${_mute}" = 'no' ] && pre=" "  || pre=" " ;;
+            audio-card-pci)
+                [ "${_mute}" = 'no' ] && pre=" "  || pre=" "
+                ;;
+            camera-web-usb)
+                [ "${_mute}" = 'no' ] && pre="󰖠 "  || pre="󱜷 "
+                ;;
+            *)
+                [ "${_mute}" = 'no' ] && pre=" "  || pre=" "
+                ;;
         esac
         # Check if it's a bluetooth source
         if echo "${_icon}" | grep -q 'bluez' ; then
-            suf=' '
+            suf=' '
         else
             suf=''
         fi
@@ -128,7 +143,7 @@ print_info () {
         empty_output
         exit 1
     fi
-    txt="${_volm}"
+    txt="${_volm}"
     if [ "${_mute}" = 'true' ] ; then
         feature='mute'
     fi

@@ -25,7 +25,7 @@ click_right  () {
 }
 print_info () {
     # Example pre-amble
-    pre=' '
+    pre='󰋊 '
     suf=''
     txt=''
     # Some overrides for locations based on hostname
@@ -43,7 +43,7 @@ print_info () {
         dir="${instance}"
         txt="$(basename "${instance}"): "
     elif [ "${instance}" = 'root' ] ; then
-        pre='פּ '
+        pre=' '
         dir="/"
     elif [ "${instance}" = 'home' ] ; then
         pre=' '
@@ -60,7 +60,7 @@ print_info () {
         pre=' '
         dir="/mnt/windows"
     elif [ "${instance}" = 'filesystem' ] ; then
-        pre='פּ '
+        pre='󰋊 '
         dir="/mnt/filesystem"
         txt="FS: "
     elif [ "${instance}" = 'quit' ] ; then

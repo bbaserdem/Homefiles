@@ -56,7 +56,11 @@ for _arg in "${@}"; do
 
         # Build the package
         cd "${_loc}" || exit
-        makechrootpkg -cur "${_chroot}"
+        makechrootpkg -cur "${_chroot}" || {
+            notify-send "Archrepo Build: ${_arg}" "Package build failed!" \
+                -u critical -i dialog-error
+            exit 1
+        }
         cd - || exit
 
         # For each individual file packaged
@@ -67,7 +71,11 @@ for _arg in "${@}"; do
             _pre="$(echo _file | sed 's|^\(a-z,A-Z,-]*\)-[0-9]\(.*\)|\1|g')"
             s3cmd rm "${_dest}/${_pre}-*" || true
             # Add to s3
-            s3cmd sync --acl-public "$_file" "${_dest}/"
+            s3cmd sync --acl-public "$_file" "${_dest}/" || {
+                notify-send "Archrepo Build: ${_arg}" "Failed to upload package!" \
+                    -u critical -i dialog-warning
+                exit 1
+            }
         done
 
     else
@@ -79,4 +87,12 @@ done
 s3cmd sync --follow-symlinks --acl-public \
     "${_local}/${_name}.db"* \
     "${_local}/${_name}.files"* \
-    "${_dest}/"
+    "${_dest}/" || {
+        notify-send "Archrepo Build: ${_arg}" "Failed to upload database!" \
+            -u critical -i dialog-warning
+        exit 1
+    }
+
+# Alert that build is done
+notify-send "Archrepo Build: ${_arg}" "Completed package sync!" \
+    -i dialog-info

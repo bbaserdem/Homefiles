@@ -29,7 +29,7 @@ click_right  () {
 print_info () {
     feature=''
     suf=''
-    pre=' '
+    pre=' '
     # Disable module if calendar does not exist
     if [ ! -d "${SYSINFO_CAL_LOC}" ] ; then
         empty_output

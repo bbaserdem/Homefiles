@@ -18,7 +18,7 @@ if [ -z "${SYSINFO_FAN_POLL}" ] ; then
     SYSINFO_FAN_POLL=5
 fi
 print_info () {
-    pre=' '
+    pre='󰈐 '
     suf=''
     # Check fan output
     if [ "${instance}" = 'default' ] ; then

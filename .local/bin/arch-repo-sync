@@ -49,7 +49,11 @@ for _arg in "${@}" ; do
         --chroot --directory "${_chroot}" \
         --pacman-conf /etc/pacman.conf \
         --makepkg-conf "${_conf}" \
-        "${_arg}"
+        "${_arg}" || {
+            notify-send "Archrepo Sync: ${_arg}" "Package build failed!" \
+                -u critical -i dialog-error
+            exit 1
+        }
 done
 
 # Upload all the newly generated package files
@@ -60,11 +64,23 @@ for _file in $(find "${_local}/" -maxdepth 2 -name "*.pkg.tar*") ; do
     _pre="$(echo _file | sed 's|^\(a-z,A-Z,-]*\)-[0-9]\(.*\)|\1|g')"
     s3cmd rm "${_dest}/${_pre}-*" || true
     # Add to s3
-    s3cmd sync --acl-public $_file "${_dest}/"
+    s3cmd sync --acl-public $_file "${_dest}/" || {
+        notify-send "Archrepo Sync: ${_arg}" "Failed to upload package!" \
+            -u critical -i dialog-warning
+        exit 1
+    }
 done
 
 # Sync local database to remote
 s3cmd sync --follow-symlinks --acl-public \
     "${_local}/${_name}.db"* \
     "${_local}/${_name}.files"* \
-    "${_dest}/"
+    "${_dest}/" || {
+        notify-send "Archrepo Sync: ${_arg}" "Failed to upload database!" \
+            -u critical -i dialog-warning
+        exit 1
+    }
+
+# Alert that build is done
+notify-send "Archrepo Sync: ${_arg}" "Completed package sync!" \
+    -i dialog-info

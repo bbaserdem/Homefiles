@@ -46,10 +46,10 @@ print_info () {
     txt="$(find "${mailbox_location}/new" | wc -l)"
     # Set up suffix
     if [ "${txt}" -le 0 ] ; then
-        suf=" "
+        suf=" 󰇯"
         feature='mute'
     else
-        suf=" "
+        suf=" 󰇮"
     fi
     # Print string
     formatted_output

@@ -35,10 +35,10 @@ print_info () {
         exit 1
     fi
     # Determine the screen icon icon
-    if   [ "${txt}" -ge 75 ] ; then pre=" "
-    elif [ "${txt}" -ge 50 ] ; then pre=" "
-    elif [ "${txt}" -ge 25 ] ; then pre=" "
-    else                            pre=" "
+    if   [ "${txt}" -ge 75 ] ; then pre="󰃠 "
+    elif [ "${txt}" -ge 50 ] ; then pre="󰃟 "
+    elif [ "${txt}" -ge 25 ] ; then pre="󰃝 "
+    else                            pre="󰃞 "
     fi
     txt="${txt}"
     # Print string

@@ -19,7 +19,7 @@ fi
 print_info () {
     # Example pre-amble
     feature=''
-    pre='龍 '
+    pre='󰓅 '
     # Get the interface
     if [ "${instance}" = 'default' ] ; then
         intfc="$(ip route | awk '/^default via/ {print $5}')"

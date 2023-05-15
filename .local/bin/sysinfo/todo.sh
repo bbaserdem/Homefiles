@@ -19,7 +19,7 @@ if [ -z "${SYSINFO_TODO_MAXLEN}" ] ; then
     SYSINFO_TODO_MAXLEN=30
 fi
 print_info () {
-    pre='省 '
+    pre='󰜎 '
     suf=''
     # Fail if the watch folder does not exist
     if [ ! -d "${SYSINFO_TODO_LOC}" ] ; then

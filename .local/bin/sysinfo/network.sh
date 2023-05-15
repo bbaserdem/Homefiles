@@ -37,12 +37,12 @@ print_info () {
     fi
     # Get icon
     case "${intfc}" in
-        eth*|en*) pre=' ' ;;
+        eth*|en*) pre='󰈀 ' ;;
         wifi*|wl*) pre=' ' ;;
-        tether)   pre='禍 ' ;;
+        tether)   pre='󱇰 ' ;;
         blue*)    pre=' ' ;;
-        lan*)     pre=' ' ;;
-        *)        pre='爵 ' ;;
+        lan*)     pre='󰒍 ' ;;
+        *)        pre='󰛳 ' ;;
     esac
     # Get IP address for everybody
     txt="$(ip addr show "${intfc}" 2>/dev/null | awk '/inet/ {print $2}' | head -n 1)"

@@ -65,62 +65,64 @@ print_info () {
         #---BUTTONS---#
         # Single characters; format these as txt for foreground, and prefix for accented
         if [ "${instance}" = 'next' ] ; then
-            txt='怜'
+            txt='󰒭'
         elif [ "${instance}" = 'prev' ] ; then
-            txt='玲'
+            txt='󰒮'
         elif [ "${instance}" = 'rewind' ] ; then
-            txt='丹'
+            txt='󰑟'
         elif [ "${instance}" = 'fastforward' ] ; then
-            txt=''
+            txt='󰈑'
         elif [ "${instance}" = 'random' ] ; then
             if echo "${info}" | grep --quiet "${instance}: on" ; then
-                pre='列'
+                pre='󰒟'
             else
-                txt='劣'
+                txt='󰒞'
             fi
         elif [ "${instance}" = 'repeat' ] ; then
             if echo "${info}" | grep --quiet "${instance}: on" ; then
-                pre='凌'
+                pre='󰑖'
             else
-                txt='稜'
+                txt='󰑗'
             fi
         elif [ "${instance}" = 'consume' ] ; then
             if echo "${info}" | grep --quiet "${instance}: on" ; then
-                pre=''
+                pre='󱙝'
             else
-                txt=''
+                txt='󱙜'
             fi
         elif [ "${instance}" = 'single' ] ; then
             if echo "${info}" | grep --quiet "${instance}: on" ; then
-                pre='綾'
+                pre='󰑘'
             else
-                txt='綾'
+                txt='󰑘'
             fi
         elif [ "${instance}" = 'toggle' ] ; then
             # It's playing/paused only if there are 3 lines
             if [ "${lines}" = '3' ] ; then
                 if echo "${info}" | grep --quiet 'paused' ; then
-                    txt='契'
+                    txt=''
                 else
-                    txt=''
+                    txt=''
                 fi
             # It is stopped
             else
-                txt='懶'
+                txt='󰐎'
             fi
         elif [ "${instance}" = 'song' ] || [ "${instance}" = 'default' ] ; then
             pre=' '
             # Check if mpdscribble is working
-            if pgrep mpdscribble >/dev/null 2>&1; then
+            if   pgrep listenbrainz-mpd >/dev/null 2>&1; then
+                suf=' 󰧑'
+            elif pgrep mpdscribble      >/dev/null 2>&1; then
                 suf=' '
             fi
             # Get song title if it's playing: 3 lines
             if [ "${lines}" = '3' ] ; then
                 # Add toggle to suffix
                 if echo "${info}" | grep --quiet 'paused' ; then
-                    suf="${suf} "
+                    suf="${suf} "
                 else
-                    suf="${suf} 契"
+                    suf="${suf} "
                 fi
                 tit="$(echo "${info}" | sed --quiet '1p' | awk -F ' - ' '{print $2}')"
                 art="$(echo "${info}" | sed --quiet '1p' | awk -F ' - ' '{print $1}')"
@@ -141,7 +143,7 @@ print_info () {
             elif  [ "${lines}" = '2' ] ; then
                 txt='Database update…'
                 feature='mute'
-                suf="${suf} 懶"
+                suf="${suf} 󰑓"
             else
                 txt='Empty playlist…'
                 feature='mute'
@@ -149,9 +151,11 @@ print_info () {
         fi
     # If none of the conditions are satisfied; just apply a disconnect suffix to default
     elif [ "${instance}" = 'song' ] || [ "${instance}" = 'default' ] ; then
-        pre='ﱙ'
+        pre='󰟦'
         # Check if mpdscribble is working
-        if pgrep mpdscribble >/dev/null 2>&1; then
+        if   pgrep listenbrainz-mpd >/dev/null 2>&1; then
+            suf=' 󰧑'
+        elif pgrep mpdscribble      >/dev/null 2>&1; then
             suf=' '
         fi
     fi

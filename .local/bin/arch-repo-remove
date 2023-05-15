@@ -30,7 +30,11 @@ ln --symbolic --force "${_local}/$(basename "${_filelist}")" "${_local}/$_name.f
 
 # Remove the packages from this repo
 for _arg in "${@}" ; do
-    repo-remove "${_local}/$(basename "${_database}")" "${_arg}"
+    repo-remove "${_local}/$(basename "${_database}")" "${_arg}" || {
+        notify-send "Archrepo Remove: ${_arg}" "Package removal failed!" \
+        -u critical -i dialog-error
+        exit 1
+    }
     s3cmd rm "${_dest}/${_arg}-*" || true
 done
 
@@ -38,4 +42,12 @@ done
 s3cmd sync --follow-symlinks --acl-public \
     "${_local}/${_name}.db"* \
     "${_local}/${_name}.files"* \
-    "${_dest}/"
+    "${_dest}/" || {
+        notify-send "Archrepo Remove: ${_arg}" "Failed to upload database!" \
+        -u critical -i dialog-warning
+        exit 1
+    }
+
+# Alert that removal is done
+notify-send "Archrepo Remove: ${_arg}" "Removed package!" \
+    -i dialog-info

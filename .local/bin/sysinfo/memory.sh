@@ -24,7 +24,7 @@ click_right  () {
 }
 print_info () {
     # Initialize
-    pre=' '
+    pre='󰍛 '
     suf=''
     # Get memory info (raw and human readable
     info_raw="$(free -m)"
