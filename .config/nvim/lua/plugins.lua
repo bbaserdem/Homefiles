@@ -52,6 +52,7 @@ M.this_setup = require('packer').startup(function(use)
         },
         config = function()
             require('auto-session').setup({
+                auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
                 auto_session_enable_last_session = false,
                 auto_restore_enabled = false,
                 auto_session_use_git_branch = true,
@@ -636,13 +637,15 @@ plugLoader('trouble', {
 
 -- Vimtex
 g.vimtex_mappings_enabled = 0
+g.vimtex_quickfix_autoclose_after_keystrokes = 1
 g.vimtex_compiler_method = 'latexmk'
 g.vimtex_view_method = 'zathura'
 g.vimtex_compiler_progname = 'nvr'
 g.vimtex_quickfix_ignore_filters = {
     'Underfull',
     'Overfull',
-    'Float too large'
+    'Float too large',
+    'Package siunitx Warning',
 }
 --g.vimtex_view_zathura_options = 
 --[[
