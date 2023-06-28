@@ -40,13 +40,14 @@ audio/x-opus+ogg=smplayer.desktop;
 audio/flac=smplayer.desktop;
 video/x-theora+ogg=smplayer.desktop;
 audio/x-vorbis+ogg=smplayer.desktop;
+video/quicktime=smplayer.desktop;
 
 [Default Applications]
 application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
 image/vnd.djvu+multipage=zathura-djvu.desktop;
 text/plain=nvim.desktop;
 text/x-tex=nvim.desktop;
-image/jpeg=vimiv.desktop;
+image/jpeg=org.xfce.ristretto.desktop
 image/jpg=vimiv.desktop;
 image/gif=vimiv.desktop;
 image/png=vimiv.desktop;darktable.desktop;feh.desktop;gimp.desktop;imv-folder.desktop;imv.desktop;libresprite.desktop;okularApplication_kimgio.desktop;org.kde.mobile.okular_kimgio.desktop;org.qutebrowser.qutebrowser.desktop;org.xfce.ristretto.desktop;
@@ -75,6 +76,7 @@ x-scheme-handler/remmina=org.remmina.Remmina.desktop
 application/x-remmina=org.remmina.Remmina.desktop
 x-scheme-handler/mailto=xfce4-mail-reader.desktop;
 application/octet-stream=nvim.desktop;
+video/quicktime=smplayer.desktop
 
 [Removed Associations]
 application/pdf=libreoffice-writer.desktop;wine-extension-pdf.desktop;gimp.desktop;

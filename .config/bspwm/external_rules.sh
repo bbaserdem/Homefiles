@@ -35,7 +35,7 @@ case $class in
     mpv|smplayer|vlc|cantata|Kodi)
         DESKTOP="${ws3}";;
     # Desktop 4: Gaming
-    Steam|Stepmania)
+    Steam|steam|Stepmania)
         DESKTOP="${ws4}";;
     # Desktop 5: Other desktops
     Soffice|Qemu*|Virt-manager|*Remmina|transmission*|Skype|zoom)
