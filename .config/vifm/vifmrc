@@ -199,13 +199,13 @@ filetype *.ftp
 filextype {*.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm},
     \<image/*>
         \ {Open with xdg-default}
-        \ xdg-open %c %i &
+        \ xdg-open %c %i &,
 " Video
 filextype {*.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
     \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,*.as[fx]},
     \<video/*>
         \ {Open with xdg-default}
-        \ xdg-open %c %i &,
+        \ xdg-open %c:p,
         \ {Play using mpv}
         \ mpv --no-video %c %s,
 " Web

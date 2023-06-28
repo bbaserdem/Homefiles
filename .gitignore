@@ -22,6 +22,8 @@
 
 # Create the necessary cache directories
 !/.cache
+!/.cache/beets
+!/.cache/beets/Readme.md
 !/.cache/mpd
 !/.cache/mpd/Readme.md
 !/.cache/newsboat
