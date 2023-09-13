@@ -33,11 +33,11 @@ xdg-which-default () {
     xdg-mime query default "${type}"
 }
 
-# Aliases
 alias py='bpython'
 alias mutt='neomutt'
 alias arch-killorphans='sudo pacman -Rns $(pacman -Qttdq)'
 alias gitdiff='git difftool --no-symlinks --dir-diff'
+alias nvimX='nvim -u ~/.config/nvim/initNew.lua'
 
 # ZIM settings
 # Remove path separator from WORDCHARS.

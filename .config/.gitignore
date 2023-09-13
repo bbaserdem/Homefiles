@@ -269,6 +269,10 @@
 !/rofi/**
 /rofi/__pycache__
 
+# STREAMRIP: Get all
+!/streamrip
+!/streamrip/**
+
 # SUPERVISORD: Grab config
 !/supervisor
 !/supervisor/**

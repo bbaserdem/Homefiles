@@ -40,7 +40,15 @@ audio/x-opus+ogg=smplayer.desktop;
 audio/flac=smplayer.desktop;
 video/x-theora+ogg=smplayer.desktop;
 audio/x-vorbis+ogg=smplayer.desktop;
-video/quicktime=smplayer.desktop;
+video/avi=smplayer.desktop;
+video/flv=smplayer.desktop;
+video/mpeg=smplayer.desktop;
+video/vnd.rn-realvideo=smplayer.desktop;
+video/x-matroska=smplayer.desktop;
+video/x-ms-asf=smplayer.desktop;
+video/x-msvideo=smplayer.desktop;
+video/x-ms-wmv=smplayer.desktop;
+video/x-theora=smplayer.desktop;
 
 [Default Applications]
 application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
@@ -53,9 +61,9 @@ image/gif=vimiv.desktop;
 image/png=vimiv.desktop;darktable.desktop;feh.desktop;gimp.desktop;imv-folder.desktop;imv.desktop;libresprite.desktop;okularApplication_kimgio.desktop;org.kde.mobile.okular_kimgio.desktop;org.qutebrowser.qutebrowser.desktop;org.xfce.ristretto.desktop;
 image/tiff=darktable.desktop;
 text/html=firefox.desktop;
-video/x-msvideo=smplayer.desktop;
-video/mp4=smplayer.desktop;
-video/x-matroska=smplayer.desktop;
+video/x-msvideo=smplayer.desktop
+video/mp4=smplayer.desktop
+video/x-matroska=smplayer.desktop
 application/msword=libreoffice-writer.desktop;
 inode/directory=vifm.desktop;
 x-scheme-handler/default=firefox.desktop;
@@ -77,6 +85,15 @@ application/x-remmina=org.remmina.Remmina.desktop
 x-scheme-handler/mailto=xfce4-mail-reader.desktop;
 application/octet-stream=nvim.desktop;
 video/quicktime=smplayer.desktop
+video/x-ogm+ogg=smplayer.desktop
+video/avi=smplayer.desktop
+video/flv=smplayer.desktop
+video/mpeg=smplayer.desktop
+video/vnd.rn-realvideo=smplayer.desktop
+video/x-ms-asf=smplayer.desktop
+video/x-ms-wmv=smplayer.desktop
+video/x-theora=smplayer.desktop
+video/webm=smplayer.desktop
 
 [Removed Associations]
 application/pdf=libreoffice-writer.desktop;wine-extension-pdf.desktop;gimp.desktop;

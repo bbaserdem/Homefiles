@@ -9,15 +9,12 @@ from https://patorjk.com/software/taag/#p=display&h=3&f=Slant
 --]]
 
 local core_modules = {
-    -- Main settings
-    --[[
-    'plugins',
-    'servers',
-    'keybinds',
-    'options',
-    'colors',
-    --]]
-    'sbp',
+  -- Main settings
+  'plugins',
+  'servers',
+  'keybinds',
+  'options',
+  'colors',
 }
 
 -- Do framebuffer detection
