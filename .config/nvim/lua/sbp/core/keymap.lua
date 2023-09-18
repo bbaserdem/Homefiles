@@ -78,15 +78,15 @@ wk.register({
 -- Clipboard
 -------------------------------------
 wk.register({
-    ["<C-v>"] = { "\"+p", "(Paste) Put from clipboard"},
+    V = { "\"+p", "(Paste) Put from clipboard"},
 }, {
     mode = "n",
     prefix = "<leader>",
 })
 wk.register({
-    ["<C-c>"] = { "\"+y", "(Copy) Yank to clipboard"},
-    ["<C-x>"] = { "\"+d", "(Cut) Delete to clipboard"},
-    ["<C-v>"] = { "\"+p", "(Paste) Put from clipboard"},
+    C = { '"+y', "(Copy) Yank to clipboard"},
+    X = { '"+d', "(Cut) Delete to clipboard"},
+    V = { '"+p', "(Paste) Put from clipboard"},
 }, {
     mode = "x",
     prefix = "<leader>",
@@ -108,19 +108,30 @@ wk.register({
 -- Main keybinds
 -------------------------------------
 wk.register({
+    -- UI manipulation group
+    u = { name = "UI functions", },
+},{
+    mode = "x",
+    prefix = "<leader>",
+})
+wk.register({
     -- UI manipulation
-    u = { name = "UI functions",
+    u = {
+        name = "UI functions",
+        -- Local functions
         s = { "<cmd>setlocal spell!<cr>",
             "Toggle spellchecker", },
         p = { "<cmd>setlocal paste!<cr>",
             "Toggle paste mode", },
         ["/"] = { "<cmd>nohlsearch<cr>",
             "Turn of search highlighting",  },
-        c = { function()
-                require('telescope.builtin').colorscheme()
-            end,
-            "Show and pick (c)olorschemes", },
     },
+    -- Actions
+    a = { name = "Actions", },
+    -- System
+    s = { name = "System", },
+    -- Navigation
+    g = { name = "Git", },
     -- Navigation
     n = { name = "Navigation",
         q = { "<cmd>qa<CR>",
@@ -143,30 +154,18 @@ wk.register({
             "Close current tab", },
         n = { "<cmd>enew<CR>",
             "Create (n)ew empty buffer", },
-        o = { function()
-                require('telescope.builtin').find_files()
-            end,
-            "Search and (o)pen a new file", },
-        s = { function()
-                require('telescope.builtin').live_grep()
-            end,
-            "Live (s)earch the current buffer", },
-        b = { function()
-                require('telescope.builtin').buffers()
-            end,
-            "Show and pick (b)uffer", },
-        d = { function()
+        d = {
+            function()
                 require('bufdelete').bufdelete(0, false)
             end,
-            "(d)elete this buffer", },
-        D = { function()
+            "(d)elete this buffer",
+        },
+        D = {
+            function()
                 require('bufdelete').bufdelete(0, true)
             end,
-            "(D)elete this buffer WITHOUT saving!", },
-        t = { function()
-                require('telescope.builtin').tags()
-            end,
-            "Show and pick (t)ags", },
+            "(D)elete this buffer WITHOUT saving!",
+        },
     },
 }, {
     mode = "n",

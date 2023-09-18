@@ -48,3 +48,18 @@ require("lazy").setup("sbp.plugins", {
     },
     debug = false,
 })
+
+-- Put in our keybind
+require("which-key").register({
+    l = {
+        function()
+            require("lazy").home()
+        end,
+        "Launch (l)azy plugin manager",
+    },
+}, {
+    -- System things
+    mode = "n",
+    prefix = "<leader>s",
+})
+

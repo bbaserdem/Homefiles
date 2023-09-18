@@ -6,6 +6,7 @@
 -- It collects the syntax tree of code and displays it
 local M = {
     "nvim-treesitter/nvim-treesitter",
+    --version="0.9.0",
     build = function()
         require("nvim-treesitter.install").update({ with_sync = true })()
     end,

@@ -68,16 +68,19 @@ local M = {
     },
     {
         "rose-pine/neovim",
+        lazy = false,
         name = "rose-pine",
     },
     {
         "folke/tokyonight.nvim",
+        lazy = false,
         opts = {
             transparent = true,
         },
     },
     {
         "rebelot/kanagawa.nvim",
+        lazy = false,
         opts = { transparent = true },
     },
 }

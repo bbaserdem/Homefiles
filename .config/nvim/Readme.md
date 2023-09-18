@@ -5,19 +5,18 @@ This is my current WIP.
 
 # Languages
 
-The languages I mainly work on are as follows.
+The languages I will be setting up to work on are as follows.
 
 [ ] LaTeX
 [ ] Markdown
 [ ] C
 [ ] Python
 [ ] MATLAB
-
-# Powerline
-
-The powerline display is lualine.
-
-WIP
+[ ] R
+[ ] Bash
+[ ] POSIX shell (dash)
+[ ] Nix
+[ ] Lua
 
 # Keybinds
 
@@ -46,31 +45,28 @@ This is a list of plugins that I will configure; in order
 
 ## Utility
 
-[ ] 'axieax/urlview.nvim'
-[ ] 'rmagatti/auto-session'
-[ ] 'chentoast/marks.nvim'
-[ ] 'aserowy/tmux.nvim'
-[ ] 'numToStr/Comment.nvim'
-[ ] 'nvimdev/dashboard-nvim'
+[x] 'axieax/urlview.nvim'
+[.] 'chentoast/marks.nvim'
+[.] 'aserowy/tmux.nvim'
+[~] 'numToStr/Comment.nvim'
 
 ## UI helpers
 
 [x] 'folke/which-key.nvim'
-[ ] 'rcarriga/nvim-notify'
-[ ] 'lukas-reineke/indent-blankline.nvim'
-[ ] 'nvim-tree/nvim-web-devicons'
-[ ] 'petertriho/nvim-scrollbar'
-[ ] 'romgrk/barbar.nvim'
+[x] 'lukas-reineke/indent-blankline.nvim'
+[x] 'nvim-tree/nvim-web-devicons'
+[!] 'petertriho/nvim-scrollbar'
+[x] 'romgrk/barbar.nvim'
+[x] 'folke/twilight.nvim'
+[-] 'Bekaboo/dropbar.nvim'
+[!] 'rcarriga/nvim-notify'
 [ ] 'folke/trouble.nvim'
-[ ] 'folke/twilight.nvim'
-[ ] 'Bekaboo/dropbar.nvim'
-[ ] 'lukas-reineke/indent-blankline.nvim'
-[ ] 'rcarriga/nvim-notify'
 
 ## Simple behavior
 
 [x] 'famiu/bufdelete.nvim'
-[ ] 'startup-nvim/startup.nvim'
+[x] 'stevearc/stickybuf.nvim'
+[x] 'startup-nvim/startup.nvim'
 
 ## Functionality
 
@@ -78,10 +74,11 @@ This is a list of plugins that I will configure; in order
 [?] 'L3MON4D3/LuaSnip'
 [x] 'nvim-telescope/telescope.nvim'
 [~] 'nvim-treesitter/nvim-treesitter'
-[~] 'nvim-lualine/lualine.nvim'
-[ ] 'nvim-tree/nvim-tree.lua'
-[ ] 'Pocco81/true-zen.nvim'
-[ ] 'simrat39/symbols-outline.nvim'
+[x] 'nvim-lualine/lualine.nvim'
+[x] 'nvim-tree/nvim-tree.lua'
+[x] 'Pocco81/true-zen.nvim'
+[x] 'simrat39/symbols-outline.nvim'
+[x] 'stevearc/aerial.nvim'
 
 ## LSP
 
@@ -92,13 +89,12 @@ This is a list of plugins that I will configure; in order
 
 ## Language tools
 
-[ ] 'aouelete/sway-vim-syntax'
-[ ] 'bbaserdem/musicbrainz-vim-syntax'
-[ ] 'baskerville/vim-sxhkdrc'
-[ ] 'gentoo/gentoo-syntax'
-[ ] 'brgmnn/vim-syncthing'
-[ ] 'vim-scripts/MatlabFilesEdition'
-[ ] 'elkowar/yuck.vim'
+[x] 'aouelete/sway-vim-syntax'
+[x] 'bbaserdem/musicbrainz-vim-syntax'
+[x] 'baskerville/vim-sxhkdrc'
+[x] 'gentoo/gentoo-syntax'
+[x] 'brgmnn/vim-syncthing'
+[x] 'elkowar/yuck.vim'
 
 ### Latex
 
