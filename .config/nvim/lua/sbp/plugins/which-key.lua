@@ -22,5 +22,10 @@ return {
             margin = { 1, 0, 1, 0 },
             padding = { 1, 2, 1, 2 },
         },
+        icons = {
+            breadcrumb = "",
+            separator = "",
+            group = "",
+        },
     },
 }

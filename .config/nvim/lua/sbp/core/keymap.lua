@@ -28,7 +28,7 @@ wk.register({
         "Switch to top window split", },
     -- Resize windows 
     ["<C-Left>"] = { "<cmd>vertical resize -2<cr>",
-        "Move split bar left", },
+    "Move split bar left", },
     ["<C-Right>"] = { "<cmd>vertical resize +2<cr>",
         "Move split bar right", },
     ["<C-Down>"] = { "<cmd>resize +2<cr>",
@@ -130,8 +130,6 @@ wk.register({
     a = { name = "Actions", },
     -- System
     s = { name = "System", },
-    -- Navigation
-    g = { name = "Git", },
     -- Navigation
     n = { name = "Navigation",
         q = { "<cmd>qa<CR>",

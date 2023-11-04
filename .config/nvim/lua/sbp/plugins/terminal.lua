@@ -19,26 +19,25 @@ local M = {
 }
 
 wk.register({
-    -- UI functions
-    s = {
-        ["<Tab>"] = {
-            function()
-                require("toggleterm").toggle()
-            end,
-            "Launch terminal",
-        },
-    },
-    g = {
-        g = {
-            function()
-                require("toggleterm").toggle()
-            end,
-            "Launch lazygit",
-        },
+    ["<Tab>"] = {
+        function()
+            require("toggleterm").toggle()
+        end,
+        "Launch terminal",
     },
 }, {
     mode = "n",
     prefix = "<leader>",
+})
+wk.register({
+    ["<Esc>"] = {
+        function()
+            require("toggleterm").toggle()
+        end,
+        "Launch terminal",
+    },
+}, {
+    mode = "t",
 })
 
 return M

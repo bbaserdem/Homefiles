@@ -1,7 +1,7 @@
 # Set default search option to youtube
 --default-search "youtube1:"
 --yes-playlist
---paths "home:${HOME}/Data/Downloads/Videos"
+--paths "home:${HOME}/Sort/Downloads/Videos"
 --output "%(title)s-%(resolution)s.%(ext)s"
 --restrict-filenames
 --no-overwrites

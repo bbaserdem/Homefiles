@@ -1,6 +1,7 @@
 -------------------------------------------------
 -- ==== ICONS ====
 -------------------------------------------------
+require('sbp.util.git')
 sbp = {}
 
 -- Icons; in the future this should be framebuffer-based

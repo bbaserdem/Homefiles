@@ -255,6 +255,10 @@
 !/qutebrowser/config.py
 !/qutebrowser/quickmarks
 
+# R: Get R profile
+!/R
+!/R/Rprofile
+
 # RAMBOX: Only copy the themes
 !/pacman
 !/pacman/**

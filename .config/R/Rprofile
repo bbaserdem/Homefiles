@@ -1,0 +1,4 @@
+# Change default library location
+myPaths = .libPaths()
+myPaths[1] = gsub("sbp/", "sbp/Data/", myPaths[1])
+.libPaths(myPaths)

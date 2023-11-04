@@ -1,7 +1,7 @@
 # Beets music library info
 # Global options
-directory: ~/Media/Music
-library: ~/Media/Music/Library.db
+directory: ~/Media/Audio/Music
+library: ~/Media/Audio/Music/Beets_Library.db
 ignore_hidden: no
 asciify_paths: no
 path_sep_replace: '⌿' # Path separators should create new paths in functions
@@ -64,69 +64,138 @@ plugins:
 - missing
 - edit
 - fetchart
-- lastgenre
+- embedart
+- importadded
 - lyrics
 - mbsync
 - mpdstats
-- parentwork
 - replaygain
 - zero
-- mpdupdate
 - playlist
 - smartplaylist
+- mpdupdate
 - the
+- thumbnails
+- types
 - sbp
-- extrafiles
-#- mbcollection
+- alternatives
+- copyartifacts
+
 # Plugin options
+
+# Convert plugin to push songs to phone
 convert:
   auto: no
-  copy_album_art: no
-  embed: no
-  delete_originals: yes
-  dest: ~/Data/Downloads/ConvertBackup
-  format: 2opus
+  copy_album_art: yes
+  album_art_maxwidth: 256
+  dest: ~/Sort/Converted_Music
+  never_convert_lossy_files: yes
+  embed: yes
+  delete_originals: false
+  format: opus
   formats:
-    2opus:
+    opus:
+      command: ffmpeg -i $source -y -vn -acodec libopus -ab 192k $dest
       extension: opus
-      command: audio-convert2opus.sh $source $dest
-duplicates:
-  tag: duplicate=true
+
 fetchart:
   auto: yes
-  sources: filesystem coverart albumart itunes amazon wikipedia
+  sources:
+    - filesystem
+    - coverart: release
+    - itunes
+    - coverart: releasegroup
+    - albumart
+    - amazon
+    - wikipedia
+    - '*'
   high_resolution: yes
   store_source: yes
-lastgenre:
-  auto: no
-  canonical: yes
-  count: 3
-  min_weight: 20
+
+embedart:
+  auto: yes
+  ifempty: no
+  maxwidth: 256
+  remove_art_file: no
+
 lyrics:
-  auto: no
+  auto: yes
+  force: no
   sources: genius musixmatch tekstowo
+
 mpd:
   rating: yes
+
 replaygain:
-  auto: no
+  auto: yes
   backend: ffmpeg
   overwrite: no
+
 zero:
   auto: yes
   comments: [EAC, LAME, from.+collection, 'ripped by']
-  fields: comments images
+  fields: comments
+  update_database: true
+
 playlist:
   auto: yes
-  playlist_dir: ~/Media/Music/Playlists
-  relative_to: library
+  playlist_dir: ~/Media/Audio/Playlists
+
 smartplaylist:
-  relative_to: ~/Media/Music
-  playlist_dir: ~/Media/Music/Playlists
-extrafiles:
-  patterns:
-    booklet: '*.pdf'
+  auto: yes
+  playlist_dir: ~/Media/Audio/Playlists
+  relative_to: ~/Media/Audio/Music
+  playlists:
+    - name: JoeyFavs.m3u
+      album_query: 'introducer:Joseph Hirsh'
+      query: 'introducer:Joseph Hirsh'
+    - name: Mood-Instrumental.m3u
+      album_query: 'mood:instrumental'
+    - name: Mood-Microtonal.m3u
+      album_query: 'mood:microtonal'
+    - name: Mood-Affirmation.m3u
+      album_query: 'mood:affirmation'
+    - name: Mood-Heavy.m3u
+      album_query: 'mood:heavy'
+    - name: Mood-Turkish.m3u
+      album_query: 'mood:turkish'
+    - name: Mood-Japanese.m3u
+      album_query: 'mood:japanese'
+    - name: Mood-Ambient.m3u
+      album_query: 'mood:ambient'
+    - name: Mood-Electronic.m3u
+      album_query: 'mood:electronic'
+    - name: Mood-Space.m3u
+      album_query: 'mood:space'
+    - name: Mood-Phonk.m3u
+      album_query: 'mood:phonk'
+    - name: Mood-Trippy.m3u
+      album_query: 'mood:trippy'
+    - name: Mood-Gag.m3u
+      album_query: 'mood:gag'
+
+thumbnails:
+  auto: yes
+  force: no
+
+types:
+  phone: bool
+  dap: bool
+  game: bool
+
+copyartifacts:
+  extensions: .*
+  print_ignored: yes
+
+alternatives:
+  phone:
+    directory: /home/sbp/Shared/Android/Music
+    formats: opus mp3 ogg
+    query: "phone:True"
+    removable: false
+
 # Path specifications
 paths:
-  default: '$storage/[${initial}]/%the{${albumartist}}/%if{${division},${division}/}%if{$date,[${date}] }${album}/%if{${tracknumber},${tracknumber}. }${title} - ${artist}'
-  comp: '$storage/[${initial}]/%if{${division},${division}/}%if{$date,[${date}] }${album}/%if{${tracknumber},${tracknumber}. }${title} - ${artist}'
-  singleton: '$storage_track/[${initial}]/%the{${albumartist}}/%if{$date,[${date}] }${title} - ${artist}'
+  default: '${initial}/%the{${albumartist}}/%if{${division},${division}/}%if{$date,[${date}] }${album}%aunique{albumartist album,albumdisambig}/%if{${tracknumber},${tracknumber}. }${title} - ${artist}'
+  comp: '${initial}/%the{${albumartist}}/%if{${division},${division}/}%if{$date,[${date}] }${album}%aunique{albumartist album,albumdisambig}/%if{${tracknumber},${tracknumber}. }${title} - ${artist}'
+  singleton: '[${initial}]/%the{${albumartist}}/%if{$date,[${date}] }${title} - ${artist}'

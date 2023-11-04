@@ -23,7 +23,7 @@ function M.config()
         view = {
             relativenumber = true,
             width = function()
-                return math.floor(vim.opt.columns:get() * 0.3)
+                return math.floor(vim.opt.columns:get() * 0.2)
             end,
         },
         renderer = {

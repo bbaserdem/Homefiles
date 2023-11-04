@@ -103,13 +103,12 @@ This is a list of plugins that I will configure; in order
 
 ### Markdown
 
-[ ] 'ellisonleao/glow.nvim'
+[x] 'ellisonleao/glow.nvim'
 [ ] 'jakewvincent/mkdnflow.nvim'
 
 ### Git
 
-[ ] lewis6991/gitsigns.nvim
-[ ] 'tpope/vim-fugitive'
+[x] lewis6991/gitsigns.nvim
 
 ## Color Themes
 

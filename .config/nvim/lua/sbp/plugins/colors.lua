@@ -13,7 +13,7 @@ local M = {
                 light = "latte",
                 dark = "mocha",
             },
-            transparent_background = true,
+            transparent_background = false,
             integrations = {
                 aerial = true,
                 alpha = false,
