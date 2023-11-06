@@ -208,9 +208,6 @@
 
 # NVIM: Grab config files; and files that will have general configurations
 !/nvim
-!/nvim/*.vim
-!/nvim/*.lua
-!/nvim/**.md
 !/nvim/after
 !/nvim/after/**
 !/nvim/before
@@ -221,8 +218,10 @@
 !/nvim/ftplugin/**
 !/nvim/lua
 !/nvim/lua/**
-# Plugins folder is where compiled packer lives
-/nvim/plugin/packer_compiled.lua
+!/nvim/**.vim
+!/nvim/**.lua
+!/nvim/**.md
+!/nvim/**.json
 
 # OCTAVE: Grab example qt for colors, and the rc file
 !/octave
@@ -256,6 +255,10 @@
 !/qutebrowser/config.py
 !/qutebrowser/quickmarks
 
+# R: Get R profile
+!/R
+!/R/Rprofile
+
 # RAMBOX: Only copy the themes
 !/pacman
 !/pacman/**
@@ -268,6 +271,10 @@
 !/rofi
 !/rofi/**
 /rofi/__pycache__
+
+# STREAMRIP: Get all
+!/streamrip
+!/streamrip/**
 
 # SUPERVISORD: Grab config
 !/supervisor

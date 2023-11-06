@@ -1,0 +1,28 @@
+-------------------------------------------------
+-- name : nvim-notiy
+-- url  : https://github.com/rcarriga/nvim-notify#usage
+-------------------------------------------------
+-- Generate notification prompt
+local M = {
+    { "rcarriga/nvim-notify",
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter",
+            "nvim-lua/plenary.nvim",
+            "mrded/nvim-lsp-notify",
+        },
+        opts = {
+            background_colour = "#000000",
+        },
+        lazy = false,
+    },
+    { "mrded/nvim-lsp-notify",
+        dependencies = {
+            "rcarriga/nvim-notify",
+        },
+        opts = {
+            notify = require("notify"),
+        },
+    },
+}
+
+return M

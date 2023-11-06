@@ -1,0 +1,98 @@
+-------------------------------------------------
+-- ==== ICONS ====
+-------------------------------------------------
+require('sbp.util.git')
+sbp = {}
+
+-- Icons; in the future this should be framebuffer-based
+if not vim.g.isFramebuffer then
+    sbp.icons = {
+        lsp = {
+            Array = " ",
+            Boolean = " ",
+            Class = " ",
+            Color = " ",
+            Constant = " ",
+            Constructor = " ",
+            Enum = " ",
+            EnumMember = " ",
+            Event = " ",
+            Field = " ",
+            File = " ",
+            Folder = " ",
+            Function = " ",
+            Interface = " ",
+            Key = " ",
+            Keyword = " ",
+            Method = " ",
+            Module = " ",
+            Namespace = " ",
+            Null = "󰟢 ",
+            Number = " ",
+            Object = " ",
+            Operator = " ",
+            Package = " ",
+            Property = " ",
+            Reference = " ",
+            Snippet = " ",
+            String = " ",
+            Struct = " ",
+            Text = " ",
+            TypeParameter = " ",
+            Unit = " ",
+            Value = "󰇽 ",
+            Variable = " ",
+        },
+        diagnostics = {
+            Error = " ",
+            Warn = " ",
+            Hint = " ",
+            Info = " ",
+        },
+    }
+else
+    sbp.icons = {
+        lsp = {
+            Array = "[] ",
+            Boolean = "T/F",
+            Class = "Cls",
+            Color = "col",
+            Constant = "CON",
+            Constructor = "Cst",
+            Enum = "#. ",
+            EnumMember = "#.x",
+            Event = "!.!",
+            Field = ".x ",
+            File = "-f ",
+            Folder = "-d ",
+            Function = "f()",
+            Interface = "<-|",
+            Key = "key",
+            Keyword = "kwd",
+            Method = "met",
+            Module = "mod",
+            Namespace = "{ }",
+            Null = "N/A",
+            Number = "# #",
+            Object = "< >",
+            Operator = "ope",
+            Package = "pkg",
+            Property = "Prp",
+            Reference = "ref",
+            Snippet = "...",
+            String = "abc",
+            Struct = "str",
+            Text = "abc",
+            TypeParameter = "typ",
+            Unit = "uni",
+            Value = "val",
+            Variable = " ",
+        },
+        diagnostics = {
+            Error = "E ",
+            Warn = "W ",
+            Hint = "? ",
+            Info = "! ",
+        },
+    }
+end

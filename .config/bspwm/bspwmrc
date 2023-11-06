@@ -275,7 +275,8 @@ bspwm_infobar () {
 bspwm_lock () {
     # Arguments to go in
     _img="${_log_dir}/lockscreen.at-${DISPLAY}.png"
-    _args="--image=${_img}"
+    _args="--nofork"
+    _args="${_args} --image=${_img}"
     _args="${_args} --pointer=default"
     _args="${_args} --ignore-empty-password"
     _args="${_args} --show-failed-attempts"
@@ -290,16 +291,20 @@ bspwm_lock () {
     _args="${_args} --bar-base-width=50"
     # Create screenshot and blur it
     maim | convert - -scale 10% -scale 1000% "${_img}"
-    # Check to see if we inherited the file lock from XSS lock
+    # Check to see if we inherited the file lock from XSS lock; meaning we are asked to go to sleep
     if [ -n "${XSS_SLEEP_LOCK_FD}" ] && [ -e "/dev/fd/${XSS_SLEEP_LOCK_FD}" ] ; then
         # Will do a (forking) lock while disinheriting the fd lock
-        i3lock ${_args} "${XSS_SLEEP_LOCK_FD}"<&- || true
+        i3lock ${_args} "${XSS_SLEEP_LOCK_FD}"<&- || true &
+        # Sleep a short bit until we lock
+        sleep 2
         # Use bash build-in to close file descriptor to sleep
         exec "${XSS_SLEEP_LOCK_FD}"<&-
     else
-        #  Just do a forking lock
-        i3lock ${_args} || true
+        #  Just do a non-forking lock
+        i3lock ${_args} || true &
     fi
+    # Wait for locker to exit
+    wait
     # Remove the screenshot
     rm "${_img}"
 }

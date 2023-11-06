@@ -1,6 +1,10 @@
 ----------------------
 --- Autocompletion ---
 ----------------------
+-- CMP is an autocomplete manager, brings multiple suggestions together.
+-- There are many extensions to give it completion sources
+-- It is loaded automatically at startup.
+
 --Preload
 local cmp = require('cmp')
 local luasnip = require('luasnip')
@@ -46,9 +50,9 @@ cmp.setup({
         { priority = 4, name = 'nvim_lsp_signature_help' },
         { priority = 2, name = 'tmux' },
         { priority = 6, name = 'treesitter' },
-        { priority = 4, name = 'path' },
-        { priority = 5, name = 'buffer' },
-        { priority = 3, name = 'buffer-lines' },
+        -- { priority = 4, name = 'path' },
+        -- { priority = 5, name = 'buffer' },
+        -- { priority = 3, name = 'buffer-lines' },
         --{ name = 'omni' },
     }, {
         { priority = 3, name = 'nerdfont',  option = { insert = true, } },

@@ -1,7 +1,7 @@
 # EWW configuration
 
 My personal `eww` configuration.
-
+This is a work in progress, still walking through the [documentation](https://elkowar.github.io/eww/).
 [The main config file](eww.yuck) contains common config to all desktops.
 Specific widgets and bar are in the desktops' respective folder.
 

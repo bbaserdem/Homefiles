@@ -26,14 +26,7 @@ class MyPlugin(BeetsPlugin):
             mediafile.StorageStyle('SERIES'),
             out_type=int
         )
-        # Add field named archive
         self.add_media_field('series', _series)
-        _archive = mediafile.MediaField(
-            mediafile.MP3DescStorageStyle('Archive'),
-            mediafile.StorageStyle('ARCHIVE'),
-            out_type=str
-        )
-        self.add_media_field('archive', _archive)
 
 def _full_track(item):
     """Track name.
