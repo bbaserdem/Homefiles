@@ -6,11 +6,13 @@
 *
 !/.gitignore
 
-# Grab config and local
+# Grab config and local folders
 !/.config
 !/.config/.gitignore
+
 !/.local
-!/.local/.gitignore
+!/Data
+!/Data/.gitignore
 
 # Ignore .ssh if folder; grab if symlink
 !/.ssh
@@ -48,42 +50,6 @@
 !/.gtkrc-2.0
 !/.latexmkrc
 !/.tmux.conf
-
-# Grab some directory structure so that these are imported
-
-#----------#
-#---DATA---#
-#----------#
-!/Data
-!/Data/Readme.md
-
-# Symlinks
-!/Data/Cache
-!/Data/Configs
-!/Data/Local
-
-# System folders
-!/Data/Calendar
-!/Data/Calendar/Readme.md
-!/Data/Contacts
-!/Data/Contacts/Readme.md
-!/Data/Desktop
-!/Data/Desktop/Readme.md
-!/Data/Downloads
-!/Data/Downloads/Readme.md
-!/Data/MATLAB
-!/Data/MATLAB/Readme.md
-!/Data/MATLAB/*.m
-!/Data/Mail
-!/Data/Mail/Readme.md
-!/Data/Projects
-!/Data/Projects/Readme.md
-!/Data/Templates
-!/Data/Templates/Readme.md
-!/Data/Work
-!/Data/Work/Readme.md
-!/Data/Work/Stignore
-!/Data/Work/Stignore/*
 
 #-----------#
 #---MEDIA---#

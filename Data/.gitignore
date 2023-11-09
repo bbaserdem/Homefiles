@@ -42,3 +42,26 @@
 !/share/ncmpcpp
 !/share/ncmpcpp/lyrics
 !/share/ncmpcpp/lyrics/Readme.md
+
+# System folders
+!/Calendar
+!/Calendar/Readme.md
+!/Contacts
+!/Contacts/Readme.md
+!/Desktop
+!/Desktop/Readme.md
+!/Downloads
+!/Downloads/Readme.md
+!/MATLAB
+!/Data/MATLAB/Readme.md
+!/MATLAB/*.m
+!/Mail
+!/Mail/Readme.md
+!/Projects
+!/Projects/Readme.md
+!/Templates
+!/Templates/Readme.md
+!/Work
+!/Work/Readme.md
+!/Work/Stignore
+!/Work/Stignore/*
