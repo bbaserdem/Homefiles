@@ -275,6 +275,7 @@
 # STREAMRIP: Get all
 !/streamrip
 !/streamrip/**
+/streamrip/*.db
 
 # SUPERVISORD: Grab config
 !/supervisor
