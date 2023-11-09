@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# Define our XDG Base Directories
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_DATA_HOME="${HOME}/Data/share"
+export XDG_STATE_HOME="${HOME}/Data/state"
+
 # Import Path
 [ -d "${HOME}/.local/bin" ] && PATH="${HOME}/.local/bin:${PATH}"
 
