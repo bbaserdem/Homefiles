@@ -139,11 +139,11 @@ zero:
 
 playlist:
   auto: yes
-  playlist_dir: ~/Media/Audio/Playlists
+  playlist_dir: ~/Media/Audio/Music/Playlists
 
 smartplaylist:
   auto: yes
-  playlist_dir: ~/Media/Audio/Playlists
+  playlist_dir: ~/Media/Audio/Music/Playlists
   relative_to: ~/Media/Audio/Music
   playlists:
     - name: JoeyFavs.m3u
