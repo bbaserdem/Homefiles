@@ -58,6 +58,7 @@ match:
 pluginpath:
 - ~/.config/beets/beetsplug
 plugins:
+- badfiles
 - convert
 - duplicates
 - info
@@ -97,6 +98,11 @@ convert:
     opus:
       command: ffmpeg -i $source -y -vn -acodec libopus -ab 192k $dest
       extension: opus
+
+badfiles:
+  check_on_import: yes
+  commands:
+    flac: flac --test --warnings-as-errors --silent
 
 fetchart:
   auto: yes
