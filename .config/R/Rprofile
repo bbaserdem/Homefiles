@@ -1,4 +1,8 @@
 # Change default library location
-myPaths = .libPaths()
-myPaths[1] = gsub("sbp/", "sbp/Data/", myPaths[1])
-.libPaths(myPaths)
+# <I switched to using R_LIBS
+#myPaths = .libPaths()
+#myPaths[1] = gsub("sbp/", "sbp/Data/", myPaths[1])
+#.libPaths(myPaths)
+
+# Save history in cache folder
+#savehistory(file = "/home/sbp/.cache/R/Rhistory")
