@@ -127,7 +127,8 @@ embedart:
 lyrics:
   auto: yes
   force: no
-  sources: genius musixmatch tekstowo
+  sources: lrclib genius
+  synced: yes
 
 mpd:
   rating: yes

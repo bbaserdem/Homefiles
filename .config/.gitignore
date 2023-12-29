@@ -259,6 +259,10 @@
 !/R
 !/R/Rprofile
 
+# Rclone: Get config
+!/rclone
+!/rclone/rclone.conf
+
 # RAMBOX: Only copy the themes
 !/pacman
 !/pacman/**
