@@ -61,9 +61,6 @@ local M = {
             "yaml",
             "yuck",
         },
-        context_commentstring = { -- nvim-ts-context-commentstring
-            enable = true,
-        },
         autotag = { -- nvim-ts-autotag
             enable = true
         },
