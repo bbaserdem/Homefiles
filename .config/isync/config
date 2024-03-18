@@ -1,0 +1,65 @@
+##########################
+##### Config options #####
+##########################
+Create Both
+Expunge Both
+SyncState *
+
+#################
+##### Gmail #####
+#################
+IMAPAccount Google
+Host imap.gmail.com
+UserCmd "$HOME/.cache/isync/eaddress-google.sh"
+PassCmd "$HOME/.cache/isync/password-google.sh"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# Remote storage
+IMAPStore Google-remote
+Account Google
+
+# Local storage
+MaildirStore Google-local
+Subfolders Verbatim
+Path ~/Data/Mail/Google/
+Inbox ~/Data/Mail/Google/Inbox
+
+Channel Google-Inbox
+Far :Google-remote:
+Near :Google-local:
+Patterns "INBOX"
+Create Near
+
+Channel Google-sent
+Far :Google-remote:"[Gmail]/Sent Mail"
+Near :Google-local:Sent
+Create Near
+
+Channel Google-trash
+Far :Google-remote:"[Gmail]/Trash"
+Near :Google-local:Trash
+Create Near
+
+Channel Google-drafts
+Far :Google-remote:"[Gmail]/Drafts"
+Near :Google-local:Drafts
+Create Near
+
+Channel Google-important
+Far :Google-remote:"[Gmail]/Important"
+Near :Google-local:Important
+Create Near
+
+Channel Google-starred
+Far :Google-remote:"[Gmail]/Starred"
+Near :Google-local:Starred
+Create Near
+
+Group Google
+Channel Google-inbox
+Channel Google-sent
+Channel Google-trash
+Channel Google-drafts
+Channel Google-important
+Channel Google-starred

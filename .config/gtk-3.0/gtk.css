@@ -1,0 +1,24 @@
+/* UNITE windowDecorations */
+@import url('/home/sbp/.local/share/gnome-shell/extensions/unite@hardpixel.eu/styles/gtk3/buttons-right/always.css');
+/* windowDecorations UNITE */
+/************
+ * Terminal *
+ ***********/
+
+PantheonTerminalPantheonTerminalWindow.background {
+   background-color: transparent;
+}
+
+/*********************
+ * wingpanel support *
+ ********************/
+
+.panel {
+    background-color: transparent;
+    transition: all 1s ease-in-out;
+}
+
+.panel.maximized {
+    background-color: #000;
+}
+/* @import 'colors.css'; */

@@ -1,0 +1,131 @@
+// Global
+*{
+  all: unset;
+}
+
+/*
+ * base00 - Black: Default Background
+ * base01 - Black: Lighter Background (Used for status bars)
+ * base02 - Black: Selection Background
+ * base03 - Black: Comments, Invisibles, Line Highlighting
+ * base04 - White: Dark Foreground (Used for status bars)
+ * base05 - White: Default Foreground, Caret, Delimiters, Operators
+ * base06 - White: Light Foreground (Not often used)
+ * base07 - White: Light Background (Not often used)
+ * base08 - Red: Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+ * base09 - Orange: Integers, Boolean, Constants, XML Attributes, Markup Link Url
+ * base0A - Yellow: Classes, Markup Bold, Search Text Background
+ * base0B - Green: Strings, Inherited Class, Markup Code, Diff Inserted
+ * base0C - Cyan: Support, Regular Expressions, Escape Characters, Markup Quotes
+ * base0D - Indigo: Functions, Methods, Attribute IDs, Headings
+ * base0E - Violet: Keywords, Storage, Selector, Markup Italic, Diff Changed
+ * base0F - Brown: Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
+ */
+$base00: #181818;
+$base01: #282828;
+$base02: #383838;
+$base03: #585858;
+$base04: #b8b8b8;
+$base05: #d8d8d8;
+$base06: #e8e8e8;
+$base07: #f8f8f8;
+$base08: #ab4642;
+$base09: #dc9656;
+$base0A: #f7ca88;
+$base0B: #a1b56c;
+$base0C: #86c1b9;
+$base0D: #7cafc2;
+$base0E: #ba8baf;
+$base0F: #a16946;
+
+// Variable Color's
+$black:     $base00;
+$background:$base01;
+$gray:      $base03;
+$foreground:$base05;
+$white:     $base07;
+$red:       $base08;
+$orange:    $base09;
+$yellow:    $base0A;
+$green:     $base0B;
+$cyan:      $base0C;
+$blue:      $base0D;
+$magenta:   $base0E;
+$brown:     $base0F;
+$dim_amnt:  75%;
+
+// Mass control
+$border_rad:    8px;
+
+// EWW BAR
+.leftbar-area{
+    font-family: "statusbar";
+    font-size: 1.2em;
+    padding: 6px 0px 6px 6px;
+}
+.bar-left{
+    background-color: $background;
+    border-radius: $border_rad;
+}
+.bar-left-top{
+    padding: .75rem 0 0 0;
+}
+.bar-left-bot{
+    padding: 0 0 .75rem 0;
+}
+
+// Separators
+.separator {
+    color: $base02;
+}
+
+// Workspaces
+.workspaces {
+    font-family: "statusbar";
+    padding: .2rem .5rem .2rem .5rem;
+}
+.desktop-monocle, .desktop-tiled{
+    color: $cyan;
+    font-family: "statusbar";
+}
+.desktop-focused, .desktop-urgent, .desktop-occupied, .desktop-unoccupied{
+    margin: .3rem 0 .3rem 0;
+}
+.desktop-unoccupied {
+    color: $gray;
+}
+.desktop-occupied {
+    color: $foreground;
+}
+.desktop-urgent {
+    color: $orange;
+}
+.desktop-focused {
+    font-weight: bold;
+    color: $white;
+}
+
+// Clock and time
+.clock {
+    font-family: "statusbar";
+    padding: .2rem .5rem .2rem .5rem;
+    font-weight: bold;
+}
+.clock-icon {
+    margin: .2rem 0 .2rem 0;
+    color: $cyan;
+    font-weight: bold;
+}
+.clock-hour, .clock-minute, .clock-second {
+    color: $foreground;
+}
+.date {
+    font-family: "statusbar";
+    padding: .2rem .5rem .2rem .5rem;
+    font-weight: bold;
+}
+.date-icon {
+    margin: .2rem 0 .2rem 0;
+    color: $orange;
+    font-weight: bold;
+}

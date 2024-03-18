@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Playerctl
+Comment=Media player information and manipulation
+Exec=playerctld daemon
+Icon=audio-headphones
+StartupNotify=false
+Type=Application
+Categories=Audio;Music;Player;AudioVideo;
+NoDisplay=true
+Terminal=false
+Hidden=false
