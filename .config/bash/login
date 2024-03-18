@@ -1,6 +1,0 @@
-# Source the global profile
-source $XDG_CONFIG_HOME/profile
-# Set history file
-export HISTFILE="${XDG_DATA_HOME}/bash/history"
-# Source bashrc
-source $XDG_CONFIG_HOME/bash/bashrc

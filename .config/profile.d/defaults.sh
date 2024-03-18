@@ -1,5 +1,0 @@
-export EDITOR="/usr/bin/nvim"
-export BROWSER="/usr/bin/firefox"
-export TERMINAL="/usr/bin/kitty"
-export SUDO_EDITOR="${EDITOR}"
-export BEETSDIR="${XDG_CONFIG_HOME}/beets"

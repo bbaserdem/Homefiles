@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=SXHKD
-Type=Application
-Exec=sxhkd
-Comment=Simple X HotKey Daemon for BSPWM
-Terminal=false
-StartupNotify=false
-OnlyShowIn=bspwm;
