@@ -3,10 +3,46 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "sbp";
-  home.homeDirectory = "/home/sbp";
-  xdg.dataHome = "/home/sbp/Data/share";
-  xdg.stateHome = "/home/sbp/Data/state";
+
+  # XDG directories
+  xdg = {
+    cacheHome = "/home/sbp/.cache";
+    configHome = "/home/sbp/.config";
+    dataHome = "/home/sbp/.local/share";
+    stateHome = "/home/sbp/.local/state";
+  };
+
+  # Some info regarding usage
+  home = {
+    username = "sbp";
+    homeDirectory = "/home/${config.home.username}";
+    keyboard = {
+      layout = "us,tr,us";
+      variant = "dvorak-alt-intl,f,altgr-intl";
+      options = [
+        "grp:alt_caps_toggle"
+      ];
+    };
+    language = {
+      base = "en_US.UTF-8";
+      collate = "tr_TR.UTF-8";
+      name = "tr_TR.UTF-8";
+    };
+    sessionPath = [
+      "$HOME/.local/bin"
+    ];
+    sessionVariables = {
+      EDITOR = "nvim";
+      BROWSER = "firefox";
+      TERMINAL = "kitty";
+      SUDO_EDITOR = "nvim";
+    };
+    shellAliases = {
+      py = "bpython";
+      mutt = "neomutt";
+      arch-killorphans = "sudo pacman -Rns $(pacman -Qttdq)";
+    };
+  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -38,11 +74,21 @@
     # '';
   };
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
-    BROWSER = "firefox";
-    TERMINAL = "kitty";
-    SUDO_EDITOR = "nvim";
+  programs.git = {
+    enable = true;
+    userName = "Batuhan Başerdem";
+    userEmail = "baserdem.batuhan@gmail.com";
+    extraConfig = {
+      core = {
+        editor = "nvim";
+      };
+      pull = {
+        rebase = false;
+      };
+      init = {
+        defaultBranch = "main";
+      };
+    };
   };
 
   services.gpg-agent = {
