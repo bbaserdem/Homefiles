@@ -1,0 +1,195 @@
+#!/bin/bash
+
+set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/cleaner
+set preview true
+set hidden true
+set drawbox true
+set icons true
+set ignorecase true
+
+cmd dragon-out %dragon-drop -a -x "$fx"
+cmd dragon-multiple %dragon-drop -a $fx
+cmd dragon-copy %dragoncopy
+cmd dragon-in %dragonmove
+
+# Custom Functions
+cmd open ${{
+    case $(file --mime-type "$f" -bL) in
+        text/*|application/json) $EDITOR "$f";;
+        application/pdf) devour zathura "$f";;
+        application/vnd.openxmlformats-officedocument.wordprocessingml.document) devour onlyoffice-desktopeditors "$f";;
+        image/*) devour sxiv "$f";;
+        video/*) devour mpv "$f";;
+        *) xdg-open "$f" ;;
+    esac
+}}
+
+cmd bulkrename $vidir
+
+cmd bulk-rename ${{
+	index=$(mktemp /tmp/lf-bulk-rename-index.XXXXXXXXXX)
+	if [ -n "${fs}" ]; then
+		echo "$fs" > $index
+	else
+		echo "$(ls "$(dirname $f)" | tr ' ' "\n")" > $index
+	fi
+	index_edit=$(mktemp /tmp/lf-bulk-rename.XXXXXXXXXX)
+	cat $index > $index_edit
+	$EDITOR $index_edit
+	if [ $(cat $index | wc -l) -eq $(cat $index_edit | wc -l) ]; then
+		max=$(($(cat $index | wc -l)+1))
+		counter=1
+		while [ $counter -le $max ]; do
+			a="$(cat $index | sed "${counter}q;d")"
+			b="$(cat $index_edit | sed "${counter}q;d")"
+			counter=$(($counter+1))
+			
+			[ "$a" = "$b" ] && continue
+			[ -e "$b" ] && echo "File exists: $b" && continue
+			mv "$a" "$b"
+		done
+	else
+		echo "Number of lines must stay the same"
+	fi
+	rm $index $index_edit
+}}
+
+cmd mkdir ${{
+  printf "Directory Name: "
+  read var
+  mkdir -p $var
+}}
+
+cmd chmod ${{
+  printf "Mode Bits: "
+  read var
+
+  for file in "$fx"
+  do
+    chmod $var $file
+  done
+
+  lf -remote 'send reload'
+}}
+
+
+cmd q ${{
+  exit
+}}
+
+cmd ex ${{
+  case "$f" in
+      *.zip)      unzip "$f" ;;
+      *.tar.gz)   tar -xzvf "$f" ;;
+      *.tar.bz2)  tar -xjvf "$f" ;;
+      *.tar)      tar -xvf "$f" ;;
+      *.bz2)       bunzip2 "$f" ;;
+      *.rar)       unrar x "$f" ;;
+      *.gz)        gunzip "$f" ;;
+      *.tbz2)      tar xjf "$f" ;;
+      *.tgz)       tar xzf "$f" ;;
+      *.Z)         uncompress "$f" ;;
+      *.7z)        7z x "$f" ;;
+      *.deb)       ar x "$f" ;;
+      *.tar.xz)    tar xf "$f" ;;
+      *.tar.zst)   tar xf "$f" ;;
+      *) echo "Unsupported format" ;;
+  esac
+}}
+
+cmd zip %zip -r "$f" "$f"
+cmd tar %tar cvf "$f.tar" "$f"
+cmd targz %tar cvzf "$f.tar.gz" "$f"
+cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
+
+# Trash cli bindings
+cmd trash ${{
+  files=$(printf "$fx" | tr '\n' ';')
+  while [ "$files" ]; do
+    # extract the substring from start of string up to delimiter.
+    # this is the first "element" of the string.
+    file=${files%%;*}
+
+    trash-put "$(basename "$file")"
+    # if there's only one element left, set `files` to an empty string.
+    # this causes us to exit this `while` loop.
+    # else, we delete the first "element" of the string from files, and move onto the next.
+    if [ "$files" = "$file" ]; then
+      files=''
+    else
+      files="${files#*;}"
+    fi
+  done
+}}
+
+cmd mkdirfile ${{
+    printf "File name: "
+    read var
+    lastchar=$(echo "$var" | rev | cut -c 1 | rev)
+    if [ "$lastchar" = "/" ]; then 
+        mkdir -p "$var"
+    else
+        path="$(echo "$var" | rev | cut -d'/' -f 2- | rev)"
+        mkdir -p "$path"
+        touch "$path/$(echo "$var" | rev | cut -d'/' -f 1 | rev)"
+    fi
+
+}}
+
+cmd stripspace %stripspace "$f"
+
+# Unassigning default
+map '"'
+map o
+map d
+map e
+map f
+map c
+
+# Open in editor
+map ee $$EDITOR "$f"
+map E $devour neovide --nofork --multigrid "$f"
+
+# Archives
+map az zip
+map at tar
+map ab targz
+map ag targz
+map au unarchive
+
+# Basics
+map . set hidden!
+map D delete
+map p paste
+map dd cut
+map y copy
+map ` mark-load
+map \' mark-load
+map <enter> open
+map c mkdirfile
+map ch chmod
+map a rename
+map A bulk-rename
+map r reload
+map C clear
+map U unselect
+
+# dragon
+map do dragon-out
+map dM dragon-multiple
+map dc dragon-copy
+map di dragon-in 
+
+map g~ cd
+map gh cd
+map gD cd ~/Downloads
+map gc cd ~/.config
+map gd cd ~/dotfiles
+map gM cd ~/Music
+map g/ cd /
+map gp cd ~/Projects
+map gs cd ~/scripts
+map gS cd ~/.local/share
+map gm cd /run/media
+map gu cd ~/uni
