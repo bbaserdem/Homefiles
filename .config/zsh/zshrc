@@ -36,6 +36,20 @@ wttr_weather () {
         curl 'https://wttr.in/'"$(echo $1)"
     fi
 }
+lfcd () {
+    tmp="$(mktemp)"
+    lf -last-dir-path="$tmp" "$@"
+    #./lfrun
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp"
+        if [ -d "$dir" ]; then
+            if [ "$dir" != "$(pwd)" ]; then
+                cd "$dir"
+            fi
+        fi
+    fi
+}
 # Show diff with color
 diff-colorful () {
     diff "${1}" "${2}" --color=always --side-by-side | less -R

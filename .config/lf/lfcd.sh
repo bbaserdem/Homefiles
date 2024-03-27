@@ -15,7 +15,7 @@
 #
 
 lfcd () {
-tmp="$(mktemp)"
+  tmp="$(mktemp)"
   lf -last-dir-path="$tmp" "$@"
   #./lfrun
   if [ -f "$tmp" ]; then
