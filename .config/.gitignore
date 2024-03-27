@@ -178,6 +178,10 @@
 !/latex
 !/latex/**
 
+# LF: Grab all
+!/lf
+!/lf/*
+
 # LISTENBRAINZ: Grab config
 !/listenbrainz-mpd
 !/listenbrainz-mpd/config.toml

@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./configs/beets.nix
+  ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
 
@@ -57,6 +60,7 @@
   # environment.
   home.packages = [
     pkgs.htop
+    pkgs.beets
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -72,6 +76,14 @@
     #   org.gradle.console=verbose
     #   org.gradle.daemon.idletimeout=3600000
     # '';
+  };
+
+  programs.beets = {
+    enable = true;
+    mpdIntegration = {
+      enableStats = true;
+      enableUpdate = true;
+    };
   };
 
   programs.git = {

@@ -28,6 +28,7 @@ local M = {
         },
         "nvim-treesitter/nvim-treesitter-textobjects",
         "JoosepAlviste/nvim-ts-context-commentstring",
+        "nix-community/tree-sitter-nix",
         "windwp/nvim-ts-autotag",
     },
     opts = {
