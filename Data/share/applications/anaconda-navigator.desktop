@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Anaconda Navigator
+Type=Application
+Exec=sh -c 'source ~/Data/anaconda3/bin/activate ; anaconda-navigator'
+Icon=/home/sbp/Data/anaconda3/lib/python3.11/site-packages/anaconda_navigator/app/icons/Icon1024.png
+Terminal=false
+StartupNotify=false

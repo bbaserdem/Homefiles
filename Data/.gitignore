@@ -38,6 +38,7 @@
 !/share/applications
 !/share/applications/thunar-bulk-rename.desktop
 !/share/applications/thunar-settings.desktop
+!/share/applications/anaconda-navigator.desktop
 !/share/mpd
 !/share/mpd/Readme.md
 !/share/ncmpcpp
