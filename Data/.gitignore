@@ -25,6 +25,7 @@
 !/bin/sysinfo
 !/bin/sysinfo/*.sh
 !/bin/eww-*
+!/bin/vifm-*
 
 # Grab the gnupg symlinks, but nothing else from this directory
 !/gnupg
