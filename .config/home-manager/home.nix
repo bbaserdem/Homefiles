@@ -1,24 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./configs/beets.nix
-  ];
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
+  home.username = "sbp";
+  home.homeDirectory = "/home/sbp";
 
-  # XDG directories
-  xdg = {
-    cacheHome = "/home/sbp/.cache";
-    configHome = "/home/sbp/.config";
-    dataHome = "/home/sbp/.local/share";
-    stateHome = "/home/sbp/.local/state";
-  };
+  targets.genericLinux.enable = true; # ENABLE THIS ON NON NIXOS
 
-  # Some info regarding usage
   home = {
-    username = "sbp";
-    homeDirectory = "/home/${config.home.username}";
     keyboard = {
       layout = "us,tr,us";
       variant = "dvorak-alt-intl,f,altgr-intl";
@@ -47,20 +35,40 @@
     };
   };
 
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "23.11"; # Please read the comment before changing.
+  xdg = {
+    cacheHome = "/home/sbp/.cache";
+    configHome = "/home/sbp/.config";
+    dataHome = "/home/sbp/.local/share";
+    stateHome = "/home/sbp/.local/state";
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "adw-gtk3";
+      package = pkgs.adw-gtk3;
+    };
+    cursorTheme = {
+      name = "Bibata-Modern-Ice";
+      package = pkgs.bibata-cursors;
+    };
+    iconTheme = {
+      name = "GruvboxPlus";
+      package = pkgs.gruvbox-plus;
+    };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = "1";
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = "1";
+    };
+  };
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
     pkgs.htop
-    pkgs.beets
+    pkgs.git
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -88,8 +96,13 @@
 
   programs.git = {
     enable = true;
-    userName = "Batuhan Başerdem";
+    userName = "bbaserdem";
     userEmail = "baserdem.batuhan@gmail.com";
+    aliases = {
+      pu = "push";
+      co = "checkout";
+      cm = "commit";
+    };
     extraConfig = {
       core = {
         editor = "nvim";
@@ -115,6 +128,7 @@
     extraConfig = "allow-loopback-pinentry";
   };
 
-  # Let Home Manager install and manage itself.
+  home.stateVersion = "23.11";
+
   programs.home-manager.enable = true;
 }
